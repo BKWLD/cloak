@@ -1,6 +1,11 @@
 siteName = 'Testing'
 module.exports = ->
 
+	# Nuxt.js modules
+	modules: [
+		'@nuxtjs/pwa'
+	]
+
 	# Meta and manifest settings
 	manifest:
 		theme_color: 'white'
