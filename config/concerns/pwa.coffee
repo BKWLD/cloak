@@ -1,5 +1,4 @@
-siteName = 'Testing'
-module.exports = ->
+module.exports = ({ siteName }) ->
 
 	# Nuxt.js modules
 	modules: [
