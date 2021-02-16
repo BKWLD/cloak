@@ -9,6 +9,8 @@
 		"@nuxtjs/pwa": "^3.0.0",
 		"coffeescript": "^2.0.0",
 		"flat": "^5.0.0",
-		"lodash": "^4.0.0"
+		"lodash": "^4.0.0",
+		"nuxt-polyfill": "^1.0.0",
+		"objectFitPolyfill": "^2.0.0"
 	}
 }
