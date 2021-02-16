@@ -1,0 +1,12 @@
+{
+	"name": "@bkwld/ghillie",
+	"version": "0.0.1",
+	"author": "info@bukwild.com",
+	"license": "MIT",
+	"main": "index.js",
+	"type": "module",
+	"dependencies": {
+		"coffeescript": "^2.0.0",
+		"flat": "^5.0.2"
+	}
+}
