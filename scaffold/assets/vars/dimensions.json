@@ -1,7 +1,4 @@
 {
 	"header-h": "60px",
-	"mobile-header-h": "40px",
-	"subnav-h": "60px",
-	"mobile-subnav-h": "35px",
-	"heavy-tapered-shadow-blur": "20px"
+	"mobile-header-h": "40px"
 }

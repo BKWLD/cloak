@@ -4,6 +4,9 @@ Add commonly used components
 path = require 'path'
 module.exports = ->
 
+	# Auto discover components
+	components: true
+
 	# Add common, global components
 	plugins: [
 		{ src: path.join __dirname, '../../plugins/smart-link' }
@@ -12,10 +15,10 @@ module.exports = ->
 	]
 
 	# Add modules that inject plugins
-	modules: {
+	modules: [
 		'nuxt-page-transition-and-anchor-handler'
 		'vue-routing-anchor-parser/nuxt/module'
-	}
+	]
 
 	# Anchor parser rules
 	anchorParser:

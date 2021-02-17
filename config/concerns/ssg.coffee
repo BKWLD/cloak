@@ -3,7 +3,7 @@ Prepare to statically generate the site using routes from a Craft query
 ###
 flatten = require 'lodash/flatten'
 once = require 'lodash/once'
-getSSGPages = require '../queries/compiled/ssg-pages'
+getCraftPages = require '../queries/compiled/craft-pages'
 { getEntries } = require '../../services/craft.coffee'
 { isGenerating } = require('../helpers.coffee')
 module.exports = ({ pageTypenames }) ->
@@ -47,5 +47,5 @@ module.exports = ({ pageTypenames }) ->
 getEntriesForTypename = (typename) ->
 	[section, type ] = typename.split '_'
 	getEntries
-		query: getSSGPages
+		query: getCraftPages
 		variables: { section, type }

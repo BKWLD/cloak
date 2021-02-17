@@ -1,4 +1,4 @@
-# Ghillie
+# Cloak
 
 ## Usage
 
@@ -21,7 +21,7 @@ module.exports = mergeConfig boilerplate,
 		routes.filter ({ name }) -> name in detailRoutes
 		.forEach (route) -> route.path = route.path.replace /\?/g, ''
 
-		# Append the boilerplate routes
+		# Append routes from boilerplate
 		return boilerplate.router.extendRoutes routes, resolve
 ```
 
@@ -33,6 +33,7 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | -------- | ----------- |
 | `siteName` | Name of site gets prepended to the `<title>` and used in PWA manifest. |
 | `polyfills` | Array of [polyfill.io](https://polyfill.io/) keywords, for example `URL`. |
+| `pageTypenames` | Array of Craft `_typename` values for page sections. These will be queried nad turned into routes. |
 
 ## Notes
 
