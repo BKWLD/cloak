@@ -1,6 +1,7 @@
 ###
 Setup style conventions like global styles, definitions.styl loading, etc
 ###
+path = require 'path'
 { isDev } = require('../helpers.coffee')
 module.exports = ->
 
@@ -23,3 +24,8 @@ module.exports = ->
 		cssnano: do ->
 			if isDev then false
 			else preset: ['default', calc: false ]
+
+	# Focus-visible for accessibility
+	plugins: [
+		{ src: path.join __dirname, '../../plugins/focus-visible' }
+	]

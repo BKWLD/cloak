@@ -12,6 +12,7 @@ uniqBy = require 'lodash/uniqBy'
 concatableArrays =
 	none: ['modules', 'buildModules', 'head.meta']
 	hid: ['head.script']
+	src: ['plugins']
 
 # Do the merging
 module.exports = (...args) ->
