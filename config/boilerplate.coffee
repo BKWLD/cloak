@@ -10,6 +10,7 @@ defaults = require 'lodash/defaults'
 meta = require './concerns/meta.coffee'
 polyfill = require './concerns/polyfill.coffee'
 pwa = require './concerns/pwa.coffee'
+styles = require './concerns/styles'
 title = require './concerns/title.coffee'
 
 # Export merging function
@@ -32,5 +33,6 @@ module.exports = (options) ->
 		meta options
 		polyfill options
 		pwa options
+		styles options
 		title options
 	]
