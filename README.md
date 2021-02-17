@@ -31,7 +31,7 @@ module.exports = mergeConfig boilerplate,
     return boilerplate.router.extendRoutes routes, resolve
 ```
 
-## Boilerplate - Options
+## Options
 
 These are options you can pass to `makeBoilerplate`.  See the [source code](config/boilerplate.coffee) for defaults.
 
