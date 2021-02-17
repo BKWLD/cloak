@@ -13,5 +13,7 @@ module.exports = ->
 	# needle on scores.
 	render: resourceHints: false
 
+	# Make seperate lighter build for modern browsers
+	modern: if isDev then false else 'client'
 
 
