@@ -9,6 +9,7 @@ From your project's `nuxt.config.coffee`:
 { mergeConfig, makeBoilerplate } = require '@bkwld/cloak'
 boilerplate = makeBoilerplate
   siteName: 'My Site'
+  pageTypenames: ['towers_towers_Entry']
 
 # Merge project specific config with cloak boilerplate
 module.exports = mergeConfig boilerplate,
