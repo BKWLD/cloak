@@ -19,18 +19,25 @@
 		"esm": "^3.0.0",
 		"flat": "^5.0.0",
 		"focus-visible": "^5.0.0",
+		"graphql": "^14.0.0",
 		"lodash": "^4.0.0",
 		"normalize.css": "^8.0.0",
 		"nuxt-coffeescript-module": "^2.0.0",
+		"nuxt-page-transition-and-anchor-handler": "^2.0.0",
 		"nuxt-polyfill": "^1.0.0",
 		"nuxt-spa-store-init": "^1.0.0",
 		"objectFitPolyfill": "^2.0.0",
+		"pug": "^2.0.0",
+		"pug-plain-loader": "^1.0.0",
 		"stylus": "^0.54.0",
 		"stylus-loader": "^3.0.0",
+		"vue-routing-anchor-parser": "^1.0.0",
 		"vue-visual": "^2.0.0",
-		"webpack-graphql-loader": "^1.0.2"
+		"webpack-cli": "^3.0.0",
+		"webpack-graphql-loader": "^1.0.0"
 	},
 	"peerDependencies": {
+		"core-js": "^3.8.3",
 		"nuxt": "^2.0.0"
 	}
 }
