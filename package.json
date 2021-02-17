@@ -18,6 +18,7 @@
 		"nuxt-polyfill": "^1.0.0",
 		"objectFitPolyfill": "^2.0.0",
 		"stylus": "^0.54.7",
-		"stylus-loader": "^3.0.2"
+		"stylus-loader": "^3.0.2",
+		"vue-visual": "^2.0.0"
 	}
 }

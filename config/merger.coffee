@@ -38,7 +38,7 @@ module.exports = (...args) ->
 				# Dedupe by the appropriate property
 				config[key] = if dedupeKey == 'none'
 				then uniq config[key]
-				else uniqBy config[key], 'hid'
+				else uniqBy config[key], dedupeKey
 
 		# Combine the final object
 		return unflatten {...config, ...settings}
