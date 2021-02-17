@@ -2,7 +2,7 @@
 
 Opinionated Nuxt + Craft boilerplate.
 
-> Unfinished, not don't use yet
+> Unfinished, don't use yet
 
 ## Usage
 
