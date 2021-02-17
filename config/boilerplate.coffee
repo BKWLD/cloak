@@ -16,6 +16,7 @@ concerns = [
 	require './concerns/polyfill.coffee'
 	require './concerns/pwa.coffee'
 	require './concerns/robots.coffee'
+	require './concerns/sentry.coffee'
 	require './concerns/ssg.coffee'
 	require './concerns/styles'
 	require './concerns/title.coffee'
@@ -42,6 +43,9 @@ module.exports = (options) ->
 
 		# Craft _typenames for page routes
 		pageTypenames: []
+
+		# Sentry repo name, like "Group Name / Repo Name"
+		repoName: null
 
 	# Merge all the concerns together, excuting their callbacks with the passed
 	# in options
