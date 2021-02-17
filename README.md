@@ -1,5 +1,9 @@
 # Cloak
 
+Opinionated Nuxt + Craft boilerplate.
+
+> Unfinished, not don't use yet
+
 ## Usage
 
 From your project's `nuxt.config.coffee`:
