@@ -51,3 +51,4 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 ## Notes
 
 - Using `cjs` module syntax for to make developing via yarn link simpler.  I tried using `esm` package but it ran into issues with imports of imports.
+- Using [a fork](https://github.com/samsarahq/graphql-loader/pull/36) of `webpack-graphql-loader` to work around issues with the loader not being found from the root package. I think because it referenced some old and unecessary deps.

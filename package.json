@@ -19,6 +19,7 @@
 		"esm": "^3.0.0",
 		"flat": "^5.0.0",
 		"focus-visible": "^5.0.0",
+		"graphql": "*",
 		"lodash": "^4.0.0",
 		"normalize.css": "^8.0.0",
 		"nuxt-coffeescript-module": "^2.0.0",
