@@ -5,24 +5,29 @@
 From your project's `nuxt.config.coffee`:
 
 ```coffee
-# Make boilerplate
+# Make boilerplate, setting some options
 { mergeConfig, makeBoilerplate } = require '@bkwld/cloak'
 boilerplate = makeBoilerplate
-	siteName: 'My Site'
+  siteName: 'My Site'
 
-# Merge boilerplate in with project specific config
+# Merge project specific config with cloak boilerplate
 module.exports = mergeConfig boilerplate,
 
-	# Customize routes
-	router: extendRoutes: (routes, resolve) ->
+  # Append additional internal routes for vue-routing-anchor-parser
+  anchorParser: internalUrls: [
+    /^https?:\/\/(www)?\.domain\.com/
+  ]
 
-		# Make all path params required in detail routes
-		detailRoutes = ['blog-tag-tag', 'blog-category-article']
-		routes.filter ({ name }) -> name in detailRoutes
-		.forEach (route) -> route.path = route.path.replace /\?/g, ''
+  # Customize routes
+  router: extendRoutes: (routes, resolve) ->
 
-		# Append routes from boilerplate
-		return boilerplate.router.extendRoutes routes, resolve
+    # Make all path params required in detail routes
+    detailRoutes = ['blog-tag-tag', 'blog-category-article']
+    routes.filter ({ name }) -> name in detailRoutes
+    .forEach (route) -> route.path = route.path.replace /\?/g, ''
+
+    # Append routes from boilerplate
+    return boilerplate.router.extendRoutes routes, resolve
 ```
 
 ## Boilerplate - Options
