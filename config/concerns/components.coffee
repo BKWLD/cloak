@@ -12,5 +12,5 @@ module.exports = ->
 
 	# Auto-load cloak components
 	buildModules: [
-		join __dirname, '../../modules/components'
+		join __dirname, '../../modules/component-registration'
 	]
