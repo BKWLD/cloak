@@ -6,6 +6,7 @@
 	"main": "index.js",
 	"type": "module",
 	"dependencies": {
+		"@nuxtjs/axios": "^5.13.1",
 		"@nuxtjs/pwa": "^3.0.0",
 		"@nuxtjs/style-resources": "^1.0.0",
 		"bukwild-stylus-library": "^2.0.0",
@@ -15,10 +16,12 @@
 		"focus-visible": "^5.0.0",
 		"lodash": "^4.0.0",
 		"normalize.css": "^8.0.0",
+		"nuxt-coffeescript-module": "^2.0.0",
 		"nuxt-polyfill": "^1.0.0",
 		"objectFitPolyfill": "^2.0.0",
 		"stylus": "^0.54.7",
-		"stylus-loader": "^3.0.2",
-		"vue-visual": "^2.0.0"
+		"stylus-loader": "^3.0.0",
+		"vue-visual": "^2.0.0",
+		"webpack-graphql-loader": "^1.0.2"
 	}
 }

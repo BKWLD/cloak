@@ -1,3 +1,6 @@
+###
+PWA module configuration
+###
 module.exports = ({ siteName }) ->
 
 	# Nuxt.js modules

@@ -10,7 +10,13 @@ uniqBy = require 'lodash/uniqBy'
 
 # Keys to arrays that should concatted and what property to dedupe by
 concatableArrays =
-	none: ['modules', 'buildModules', 'head.meta']
+	none: [
+		'modules'
+		'buildModules'
+		'head.meta'
+		'generate.ignore'
+		'anchorParser.internalUrls'
+	]
 	hid: ['head.script']
 	src: ['plugins']
 
