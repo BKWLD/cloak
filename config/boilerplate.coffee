@@ -7,6 +7,7 @@ mergeConfig = require './merger'
 defaults = require 'lodash/defaults'
 
 # Concerns that make up the whole boilerplate config
+axios = require './concerns/axios.coffee'
 coffeescript = require './concerns/coffeescript.coffee'
 craft = require './concerns/craft.coffee'
 globals = require './concerns/globals.coffee'
@@ -41,6 +42,7 @@ module.exports = (options) ->
 
 	# Merge all the concerns together
 	mergeConfig.apply null, [
+		axios options
 		coffeescript options
 		craft options
 		globals options
