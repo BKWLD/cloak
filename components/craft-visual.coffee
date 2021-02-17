@@ -1,5 +1,8 @@
-# Map Craft image objects into params for visual
+# Load Vue Visual
 import Visual from 'vue-visual'
+import 'vue-visual/index.css'
+
+# Map Craft image objects into params for visual
 export defaultPlaceholderColor = '#f3f3f2'
 export default
 	name: 'CraftVisual'

@@ -4,30 +4,26 @@ Add commonly used components and helpers
 { join } = require 'path'
 module.exports = ->
 
-	# Auto discover components
-	components: [
-		'~/components'
-		{ path: '~/components/global' }
-	]
-
 	# Add common, global components
 	plugins: [
-		{ src: join __dirname, '../../plugins/helpers' }
 		{ src: join __dirname, '../../plugins/smart-link' }
-		{ src: join __dirname, '../../plugins/vue-visual' }
-		# { src: join __dirname, '../../plugins/wysiwyg' }
 	]
 
-	# Add modules that inject plugins
+	# Add packages responsible for improving page transition handling
 	modules: [
 		'nuxt-page-transition-and-anchor-handler'
 		'vue-routing-anchor-parser/nuxt/module'
 	]
 
-	# Auto-load cloak components
-	buildModules: [
-		join __dirname, '../../modules/components'
-	]
+	# Add a default route to towers
+	router: extendRoutes: (routes, resolve) ->
+
+		# Make the tower slug optional, so the root route will match
+		routes.find (route) -> route.name == 'tower'
+		.path = '/:tower*'
+
+		# Return new routes array
+		return routes
 
 	# Anchor parser rules
 	anchorParser:
