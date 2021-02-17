@@ -2,7 +2,7 @@
 Setup style conventions like global styles, definitions.styl loading, etc
 ###
 path = require 'path'
-{ isDev } = require('../helpers.coffee')
+{ isDev } = require('../utils')
 module.exports = ->
 
 	# Global styles

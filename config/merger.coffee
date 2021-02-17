@@ -14,7 +14,7 @@ concatableArrays =
 		'modules'
 		'buildModules'
 		'head.meta'
-		'generate.ignore'
+		# 'generate.ignore'
 		'anchorParser.internalUrls'
 	]
 	hid: ['head.script']

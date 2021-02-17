@@ -1,5 +1,5 @@
 ###
-Add commonly used components
+Add commonly used components and helpers
 ###
 path = require 'path'
 module.exports = ->
@@ -9,6 +9,7 @@ module.exports = ->
 
 	# Add common, global components
 	plugins: [
+		{ src: path.join __dirname, '../../plugins/helpers' }
 		{ src: path.join __dirname, '../../plugins/smart-link' }
 		{ src: path.join __dirname, '../../plugins/vue-visual' }
 		{ src: path.join __dirname, '../../plugins/wysiwyg' }
