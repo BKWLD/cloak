@@ -48,7 +48,7 @@ module.exports = ({ pageTypenames }) -> generate:
 
 # Make a query given a pageTypeName
 getEntriesForTypename = (typename) ->
-	[section, type ] = typename.split '_'
+	[ section, type ] = typename.split '_'
 	getEntries
 		query: getCraftPages
 		variables: { section, type }

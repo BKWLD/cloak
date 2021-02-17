@@ -22,8 +22,3 @@ module.exports = ->
 	plugins: [
 		{ src: path.join __dirname, '../../plugins/craft' }
 	]
-
-	# Expect to support CMS-able redirects
-	buildModules: [
-		# '~/build/redirects'
-	]

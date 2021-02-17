@@ -21,3 +21,4 @@ module.exports = ->
 				loader: 'webpack-graphql-loader'
 				options: minify: !isDev
 			]
+		return # Don't implicitly return
