@@ -1,5 +1,5 @@
 ###
-Add commonly used components and helpers
+Setup component auto loading
 ###
 { join } = require 'path'
 module.exports = ->

@@ -1,5 +1,5 @@
 ###
-Add commonly used components and helpers
+Add various helpers related to routing
 ###
 { join } = require 'path'
 module.exports = ->

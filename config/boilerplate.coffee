@@ -14,6 +14,7 @@ concerns = [
 	require './concerns/craft'
 	require './concerns/helpers'
 	require './concerns/meta'
+	require './concerns/perf'
 	require './concerns/polyfill'
 	require './concerns/pwa'
 	require './concerns/robots'
