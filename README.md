@@ -6,7 +6,7 @@ From your project's `nuxt.config.coffee`:
 
 ```coffee
 # Make boilerplate
-{ mergeConfig, makeBoilerplate } = require '@bkwld/ghillie'
+{ mergeConfig, makeBoilerplate } = require '@bkwld/cloak'
 boilerplate = makeBoilerplate
 	siteName: 'My Site'
 

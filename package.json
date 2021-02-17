@@ -1,5 +1,5 @@
 {
-	"name": "@bkwld/ghillie",
+	"name": "@bkwld/cloak",
 	"version": "0.0.1",
 	"author": "info@bukwild.com",
 	"license": "MIT",
@@ -12,11 +12,12 @@
 		"coffee-loader": "^0.9.0",
 		"coffeescript": "^2.0.0",
 		"flat": "^5.0.0",
+		"focus-visible": "^5.0.0",
 		"lodash": "^4.0.0",
 		"normalize.css": "^8.0.0",
 		"nuxt-polyfill": "^1.0.0",
 		"objectFitPolyfill": "^2.0.0",
 		"stylus": "^0.54.7",
-		"stylus-loader": "^3.0.2",
+		"stylus-loader": "^3.0.2"
 	}
 }
