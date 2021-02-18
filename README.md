@@ -48,6 +48,14 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | `pageTypenames` | Array of Craft `_typename` values for page sections. These will be queried nad turned into routes. |
 | `repoName` | The Sentry webpack plugin's [repo](https://github.com/getsentry/sentry-webpack-plugin#optionssetcommits) value, for example `Group Name / Project Name`. |
 
+## Libraries
+
+Besides providing a bunch of nuxt.config boilerplate, this project also provides these shared resources:
+
+- [components](./components) - Vue components that are already setup for autodiscovery with no prefixing.
+- [fragments](./fragments) - GraphQL fragments for common objects
+- [services](./services) - Libraries of methods that can be imported into your code and which are also injected globally.  For example, `@$craft` and `@$defer` are available in all components.
+
 ## Notes
 
 - Using `cjs` module syntax for to make developing via yarn link simpler.  I tried using `esm` package but it ran into issues with imports of imports.
