@@ -1,0 +1,17 @@
+#import './image.gql'
+
+fragment srcset on AssetInterface {
+	...image
+	w1920:      url @transform(width: 1920)
+	w1920_webp: url @transform(width: 1920, format:"webp")
+	w1440:      url @transform(width: 1440)
+	w1440_webp: url @transform(width: 1440, format:"webp")
+	w1024:      url @transform(width: 1024)
+	w1024_webp: url @transform(width: 1024, format:"webp")
+	w768:       url @transform(width: 768)
+	w768_webp:  url @transform(width: 768, format:"webp")
+	w425:       url @transform(width: 425)
+	w425_webp:  url @transform(width: 425, format:"webp")
+	w210:       url @transform(width: 210)
+	w210_webp:  url @transform(width: 210, format:"webp")
+}

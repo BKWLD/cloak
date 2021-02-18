@@ -1,0 +1,10 @@
+# A standard image asset fragment
+fragment image on AssetInterface {
+	id
+	width
+	height
+	focalPoint
+	title
+	path
+	mimeType
+}
