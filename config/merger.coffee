@@ -18,7 +18,7 @@ concatableArrays =
 		'generate.ignore'
 		'anchorParser.internalUrls'
 	]
-	hid: ['head.script']
+	hid: ['head.script', 'head.link']
 	src: ['plugins']
 
 # Keys for methods that should be chained, like how Vue mixins for lifecycle

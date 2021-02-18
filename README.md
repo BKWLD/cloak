@@ -55,6 +55,7 @@ Besides providing a bunch of nuxt.config boilerplate, this project also provides
 
 - [components](./components) - Vue components that are already setup for autodiscovery with no prefixing.
 - [fragments](./fragments) - GraphQL fragments for common objects
+- [mixins](./mixins) - Vue mixins
 - [services](./services) - Libraries of methods that can be imported into your code and which are also injected globally.  For example, `@$craft` and `@$defer` are available in all components.
 
 ## Notes
