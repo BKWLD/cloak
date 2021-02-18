@@ -12,11 +12,12 @@ forEach = require 'lodash/forEach'
 # Keys to arrays that should concatted and what property to dedupe by
 concatableArrays =
 	none: [
-		'modules'
-		'buildModules'
-		'head.meta'
-		'generate.ignore'
 		'anchorParser.internalUrls'
+		'build.transpile'
+		'buildModules'
+		'generate.ignore'
+		'head.meta'
+		'modules'
 	]
 	hid: ['head.script', 'head.link']
 	src: ['plugins']

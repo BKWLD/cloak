@@ -12,3 +12,8 @@ module.exports = ->
 	generate: ignore: [
 		'nuxt.config.coffee'
 	]
+
+	# This package doesn't ship transpiled, so this asks Nuxt to do it
+	build: transpile: [
+		'@bkwld/cloak'
+	]
