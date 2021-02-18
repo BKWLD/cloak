@@ -1,8 +1,9 @@
 ###
 Configure the sitemap to be generated from the routes config
 ###
-{ isGenerating } = require('../utils')
-module.exports = ->
+getCraftPages = require '../../build/get-craft-pages'
+{ isGenerating } = require '../utils'
+module.exports = ({ pageTypenames }) ->
 	return unless isGenerating
 
 	# Add the module
@@ -15,7 +16,7 @@ module.exports = ->
 		hostname: process.env.URL
 
 		# Remove routes that have robots disabled
-		filter: ({ routes }) -> routes.filter (route) ->
+		routes: -> (await getCraftPages pageTypenames).filter (route) ->
 
 			# Allow simple string routes
 			return route if typeof route == 'string'

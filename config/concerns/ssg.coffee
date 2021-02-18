@@ -1,11 +1,8 @@
 ###
 Prepare to statically generate the site using routes from a Craft query
 ###
-path = require 'path'
-flatten = require 'lodash/flatten'
-getCraftPages = require path.join process.cwd(), '/queries/compiled/craft-pages'
-{ getEntries } = require '../../services/craft'
-{ isGenerating } = require('../utils')
+getCraftPages = require '../../build/get-craft-pages'
+{ isGenerating } = require '../utils'
 module.exports = ({ pageTypenames }) ->
 
 	# Always show output
@@ -30,33 +27,4 @@ module.exports = ({ pageTypenames }) ->
 		subFolders: false
 
 		# Add dynamic routes
-		routes: makeRoutes
-
-# Make the list of routes
-makeRoutes = ->
-	return [] unless isGenerating and pageTypenames.length
-	routes = []
-
-	# Loop through type combinations and add to
-	console.log('ℹ Fetching data for route generation');
-	for typename in pageTypenames
-		results = await getEntriesForTypename typename
-
-		# Make the list of routes
-		routes = [
-			...routes,
-			...flatten(results).map (entry) ->
-				route: if entry.uri == '__home__' then '/' else "/#{entry.uri}"
-				robots: entry.robots || []
-				payload: [ entry ] # Wrap in array, so same as asyncData's query
-		]
-
-	# Return final routes
-	return routes
-
-# Make a query given a pageTypeName
-getEntriesForTypename = (typename) ->
-	[ section, type ] = typename.split '_'
-	getEntries
-		query: getCraftPages
-		variables: { section, type }
+		routes: -> getCraftPages pageTypenames
