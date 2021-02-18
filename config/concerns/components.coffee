@@ -2,7 +2,7 @@
 Setup component auto loading
 ###
 { join } = require 'path'
-module.exports = ->
+module.exports = ({ imgixUrl }) ->
 
 	# Don't require "global" prefix on global components
 	components: [
@@ -14,3 +14,7 @@ module.exports = ->
 	buildModules: [
 		join __dirname, '../../modules/component-registration'
 	]
+
+	# Share imgixUrl with `craft-visual` to switch to using imgix to generate
+	# image transform URLs
+	env: IMGIX_URL: imgixUrl

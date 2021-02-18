@@ -77,3 +77,10 @@ export addInittedClass = ->
 export extendApp = (app, mixin) ->
 	app.mixins = [] unless app.mixins
 	app.mixins.push mixin
+
+# Format a URL for imgix
+export makeImgixUrl = (path, width) ->
+	return unless imgixUrl = process.env.IMGIX_URL
+	return unless path
+	return "#{imgixUrl}/#{path}" unless width
+	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&auto=compress"

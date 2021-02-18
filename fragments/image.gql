@@ -3,8 +3,8 @@ fragment image on AssetInterface {
 	id
 	width
 	height
-	focalPoint
 	title
-	path
 	mimeType
+	focalPoint
+	path
 }

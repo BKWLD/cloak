@@ -47,6 +47,7 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | `polyfills` | Array of [polyfill.io](https://polyfill.io/) keywords, for example `URL`. |
 | `pageTypenames` | Array of Craft `_typename` values for page sections. These will be queried nad turned into routes. |
 | `repoName` | The Sentry webpack plugin's [repo](https://github.com/getsentry/sentry-webpack-plugin#optionssetcommits) value, for example `Group Name / Project Name`. |
+| `imgixUrl` | For example, `https://project.imgix.net` |
 
 ## Libraries
 

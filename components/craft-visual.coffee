@@ -2,8 +2,17 @@
 import Visual from 'vue-visual'
 import 'vue-visual/index.css'
 
-# Map Craft image objects into params for visual
+# We may be using imgix
+import { makeImgixUrl } from '../services/helpers'
+
+# The srcset sizes that will be produced, whether by imgix or through Craft
+# transforms
+resizeWidths = [1920, 1440, 1024, 768, 425, 210]
+
+# Default placeholder color
 export defaultPlaceholderColor = '#f3f3f2'
+
+# Map Craft image objects into params for visual
 export default
 	name: 'CraftVisual'
 	functional: true
@@ -40,7 +49,14 @@ export default
 		# Get the assets, either of which is optional
 		image = getAssetObject props.image
 		video = getAssetObject props.video
-		imageUrl = image?.url || image?.w1440
+
+		# Get the image src, ignoring srcset for now.  We're using the
+		imageUrl = if process.env.IMGIX_URL
+			if props.natural then makeImgixUrl image?.path
+			else makeImgixUrl image?.path, resizeWidths[0]
+		else
+			if props.natural then image?.url
+			else image?['w' + resizeWidths[0]]
 
 		# Decide if there is a placeholder color
 		placeholderColor = if props.noPlaceholder
@@ -134,11 +150,10 @@ makeObjectPosition = (objectPosition, image) ->
 	objectPosition || getObjectPositionFromFocalPoint(image?.focalPoint) || '50% 50%'
 
 # The srcset values need to match those used in transforms in the query
-resizeWidths = [1920,1440,1024,768,425,210]
 export makeSrcset = (image, { webp, max } = {}) ->
 	return unless image
 
-	# Passthru gifs
+	# Passthru gifs, currently ignoring imgix for this
 	if image.mimeType == 'image/gif' then return image.url
 
 	# Don't make srcs if the there is max width restriction
@@ -149,11 +164,20 @@ export makeSrcset = (image, { webp, max } = {}) ->
 
 	# Make the srcset string
 	srcSet = sizes.map (size) ->
-		srcKey = "w#{size}"
-		srcKey += '_webp' if webp
-		"#{url} #{size}w" if url = image[srcKey]
-	.filter (val) -> !!val # Webps will be empty for svgs
-	srcSet.join(',') if srcSet.length > 1
+
+		# Make URLs through imgix
+		if process.env.IMGIX_URL
+			"#{encodeURI(makeImgixUrl(image.path, size))} #{size}w"
+
+		# Else use Craft transforms
+		else
+			srcKey = "w#{size}"
+			srcKey += '_webp' if webp
+			"#{url} #{size}w" if url = image[srcKey]
+
+	# Filter out empties, for instance webps will be empty for svgs
+	.filter (val) -> !!val
+	.join ','
 
 # Make sizes shorthands
 export sizesHelpers = (sizes) -> switch sizes
