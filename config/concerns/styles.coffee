@@ -12,7 +12,7 @@ module.exports = ->
 	]
 
 	# Append definitions.styl everywhere
-	styleResources: stylus: './assets/styles/definitions.styl'
+	styleResources: stylus: '~/assets/definitions.styl'
 	buildModules: [
 		'@nuxtjs/style-resources'
 	]
