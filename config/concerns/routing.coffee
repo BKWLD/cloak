@@ -4,11 +4,6 @@ Add various helpers related to routing
 { join } = require 'path'
 module.exports = ->
 
-	# Add common, global components
-	plugins: [
-		{ src: join __dirname, '../../plugins/smart-link' }
-	]
-
 	# Add packages responsible for improving page transition handling
 	modules: [
 		'nuxt-page-transition-and-anchor-handler'
