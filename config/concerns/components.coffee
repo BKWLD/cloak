@@ -7,7 +7,7 @@ module.exports = ({ imgixUrl }) ->
 	# Don't require "global" prefix on global components
 	components: [
 		'~/components'
-		{ path: '~/components/global' }
+		{ path: '~/components/globals' }
 	]
 
 	# Auto-load cloak components
