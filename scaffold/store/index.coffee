@@ -1,0 +1,2 @@
+export actions =
+	nuxtServerInit: ->
