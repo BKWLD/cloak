@@ -23,7 +23,7 @@
 		"lodash": "^4.0.0",
 		"normalize.css": "^8.0.0",
 		"nuxt-coffeescript-module": "^2.0.0",
-		"nuxt-page-transition-and-anchor-handler": "^2.0.0",
+		"nuxt-page-transition-and-anchor-handler": "^3.0.0",
 		"nuxt-polyfill": "^1.0.0",
 		"nuxt-spa-store-init": "^1.0.0",
 		"objectFitPolyfill": "^2.0.0",
