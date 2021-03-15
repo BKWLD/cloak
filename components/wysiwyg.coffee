@@ -21,7 +21,7 @@ export default
 			# Automatically parse anchors
 			directives: [
 				{ name: 'parse-anchors' }
-				{ name: 'unorphan' } if props.balanceText
+				{ name: 'unorphan' } if props.unorphan
 				{ name: 'balance-text', modifiers: children: true } if props.balanceText
 			].filter (val) -> !!val
 
