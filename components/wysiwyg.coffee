@@ -4,7 +4,13 @@ export default
 	functional: true
 
 	# Pass the HTML in
-	props: html: String
+	props:
+		html: String
+
+		# Enable these directives. They are expected to already be globally
+		# imported
+		unorphan: Boolean
+		balanceText: Boolean
 
 	# Render a div with wsywiyg class and props
 	render: (create, { props, data }) ->
@@ -13,7 +19,11 @@ export default
 			...data
 
 			# Automatically parse anchors
-			directives: [ { name: 'parse-anchors' } ]
+			directives: [
+				{ name: 'parse-anchors' }
+				{ name: 'unorphan' } if props.balanceText
+				{ name: 'balance-text', modifiers: children: true } if props.balanceText
+			].filter (val) -> !!val
 
 			# Append the WYSIWYG class
 			staticClass: ['wysiwyg', data.staticClass].join(' ').trim()
