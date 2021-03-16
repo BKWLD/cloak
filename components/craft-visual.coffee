@@ -27,7 +27,7 @@ export default
 		video: Object|Array
 
 		# Size
-		aspect: Number|Boolean
+		aspect: Number|String|Boolean
 		natural: Boolean
 		noUpscale: Boolean
 		width: Number
@@ -62,20 +62,23 @@ export default
 		placeholderColor = if props.noPlaceholder
 		then null else defaultPlaceholderColor
 
-		# If no asset but an aspect, still create the Visual instance which
-		# becomes a placeholder space
-		unless image or video
-			aspect = props.aspect or image?.width / image?.height
-			return unless aspect or children
-			return create Visual, { ...data, props: {
-				aspect, placeholderColor
-			} }, children
-
 		# Figure out the aspect ratio
 		aspect = switch
 			when props.aspect == false then undefined
 			when props.aspect == undefined then image?.width / image?.height
+			when props.aspect and # Convert "16:9" style aspect to a number
+				typeof props.aspect == 'string' and
+				dimensions = props.aspect?.match /^(\d+):(\d+)$/
+				then dimensions[1] / dimensions[2]
 			else props.aspect
+
+		# If no asset but an aspect, still create the Visual instance which
+		# becomes a placeholder space
+		unless image or video
+			return unless aspect or children
+			return create Visual, { ...data, props: {
+				aspect, placeholderColor
+			} }, children
 
 		# Passthrough the width and height
 		{ width, height } = if props.natural and image then image else props
