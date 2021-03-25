@@ -44,6 +44,17 @@ export default
 		objectFit: String
 		objectPosition: String
 
+		# Video passthroughs
+		autoplay:
+			type: Boolean
+			default: undefined
+		autopause:
+			type: Boolean
+			default: undefined
+		loop:
+			type: Boolean
+			default: undefined
+
 	render: (create, { props, injections, data, children, scopedSlots }) ->
 
 		# Get the assets, either of which is optional
@@ -112,9 +123,9 @@ export default
 
 				# Video
 				video: video?.url
-				autoplay: true
-				loop: true
-				muted: true
+				autoplay: props.autoplay ? true
+				loop: props.loop ? true
+				muted: props.muted ? true
 
 				# Layout
 				aspect
