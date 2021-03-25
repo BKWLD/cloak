@@ -65,10 +65,7 @@ export default
 		# Figure out the aspect ratio
 		aspect = switch
 			when props.aspect is false then undefined
-			when props.aspect is null or
-				props.aspect is undefined or
-				props.aspect is ''
-				then image?.width / image?.height
+			when !props.aspect? then image?.width / image?.height
 			when props.aspect and # Convert "16:9" style aspect to a number
 				typeof props.aspect == 'string' and
 				dimensions = props.aspect?.match /^(\d+):(\d+)$/
