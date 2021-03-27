@@ -138,6 +138,7 @@ export default
 
 				# Loading, don't lazyload the first 2 block's assets
 				lazyload: !(injections.blockIndex < 2)
+				transition: if injections.blockIndex < 2 then '' else undefined
 
 				# Disabling placeholder for now since it's causing strange issues with
 				# SSG that I can't immediately explain
