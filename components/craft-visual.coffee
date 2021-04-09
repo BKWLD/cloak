@@ -58,6 +58,9 @@ export default
 		loop:
 			type: Boolean
 			default: undefined
+		muted:
+			type: Boolean
+			default: undefined
 	}
 
 	# Render a Visual instance
