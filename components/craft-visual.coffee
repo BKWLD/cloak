@@ -46,6 +46,9 @@ export default
 
 		# Set base booleans to an undefined default so we can test whether they
 		# were explicitly made false or are actually undefined
+		lazyload:
+			type: Boolean
+			default: undefined
 		autoplay:
 			type: Boolean
 			default: undefined
