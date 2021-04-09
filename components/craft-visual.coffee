@@ -12,6 +12,11 @@ resizeWidths = [1920, 1440, 1024, 768, 425, 210]
 # Default placeholder color
 export defaultPlaceholderColor = '#f3f3f2'
 
+# Make the list of base Visual props, manually merging all mixins
+baseProps = Visual.mixins.reduce (props, mixin) ->
+	{ ...props, ...mixin.props }
+, { ...Visual.props }
+
 # Map Craft image objects into params for visual
 export default
 	name: 'CraftVisual'
@@ -20,31 +25,27 @@ export default
 	# Get the index of the block this may be in
 	inject: blockIndex: default: undefined
 
-	props:
+	props: {
+		...baseProps
 
-		# A Craft image object with width, height, etc
-		image: Object|Array
-		video: Object|Array
+		# A support Craft objects with width, height, etc
+		image: Object | Array
+		video: Object | Array
 
-		# Size
-		aspect: Number|String|Boolean
+		# Support additional types
+		aspect: Number | String | Boolean
+
+		# Set width and height to natural size
 		natural: Boolean
+
+		# Use image's width as a max-width
 		noUpscale: Boolean
-		width: Number
-		height: Number
 
 		# Clear placeholder color, like for logos
 		noPlaceholder: Boolean
 
-		# CSS image sizes rules
-		sizes: String
-
-		# Some passthrough props
-		expand: Boolean
-		objectFit: String
-		objectPosition: String
-
-		# Video passthroughs
+		# Set base booleans to an undefined default so we can test whether they
+		# were explicitly made false or are actually undefined
 		autoplay:
 			type: Boolean
 			default: undefined
@@ -54,7 +55,9 @@ export default
 		loop:
 			type: Boolean
 			default: undefined
+	}
 
+	# Render a Visual instance
 	render: (create, { props, injections, data, children, scopedSlots }) ->
 
 		# Get the assets, either of which is optional
@@ -105,8 +108,17 @@ export default
 		if imageUrl and !sizes and process.env.APP_ENV == 'dev'
 		then console.debug "No sizes prop for #{imageUrl}"
 
-		# Were sources created upstream, by, for instance, responsive-viusal
+		# Were sources created upstream, by, for instance, responsive-craft-visual
 		hasSources = !!scopedSlots['image-source']
+
+		# Disable lazy loading automatically if found in 2 blocks. Written
+		# kinda weird so it defaults to true when blockIndex is undefined
+		notCriticalImage = !(injections.blockIndex < 2)
+		lazyload = props.lazyload ? notCriticalImage
+
+		# If transition is undefined and is a crticial image, disable the
+		# transition so the visual doesn't begin as display none.
+		transition = props.transition ? if notCriticalImage then undefined else ''
 
 		# Instantiate a Visual instance
 		create Visual, {
@@ -136,15 +148,12 @@ export default
 				objectPosition: makeObjectPosition props.objectPosition, image
 				expand: props.expand
 
-				# Loading, don't lazyload the first 2 block's assets
-				lazyload: !(injections.blockIndex < 2)
-				transition: if injections.blockIndex < 2 then '' else undefined
-
-				# Disabling placeholder for now since it's causing strange issues with
-				# SSG that I can't immediately explain
+				# Loading
+				lazyload
+				transition
 				placeholderColor
 
-				# Misc
+				# Accessibility
 				alt: image?.title || video?.title
 		}}, children
 
