@@ -84,3 +84,7 @@ export makeImgixUrl = (path, width) ->
 	return unless path
 	return "#{imgixUrl}/#{path}" unless width
 	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&auto=compress"
+
+# Capitalize the first letter of a word
+# https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
+export ucFirst = (str) -> str.charAt(0).toUpperCase() + str.slice(1)
