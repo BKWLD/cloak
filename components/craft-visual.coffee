@@ -131,6 +131,9 @@ export default
 			...data
 			props: {
 
+				# Passthrough props by default
+				...props
+
 				# Image
 				image: imageUrl
 				sizes
@@ -150,9 +153,7 @@ export default
 				width
 				height
 				maxWidth
-				objectFit: props.objectFit
 				objectPosition: makeObjectPosition props.objectPosition, image
-				expand: props.expand
 
 				# Loading
 				lazyload
