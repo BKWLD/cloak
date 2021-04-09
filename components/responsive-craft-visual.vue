@@ -33,7 +33,7 @@ export default
 		@mounted = true
 
 	destroyed: ->
-		@isLanscapeMediaQuery.removeListener 'resize', @checkIsLandscape
+		@isLanscapeMediaQuery?.removeListener @checkIsLandscape
 
 	computed:
 
