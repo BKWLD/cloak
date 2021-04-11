@@ -159,6 +159,8 @@ export default
 				lazyload
 				transition
 				placeholderColor
+				intersectionOptions: props.intersectionOptions ?
+					rootMargin: '50% 0% 50% 0%'
 
 				# Accessibility
 				alt: image?.title || video?.title
