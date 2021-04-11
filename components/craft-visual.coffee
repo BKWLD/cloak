@@ -61,6 +61,12 @@ export default
 		muted:
 			type: Boolean
 			default: undefined
+
+		# Other types with default values in Craft visual that we want to be able
+		# to test for undefined-ness
+		intersectionOptions:
+			type: Object
+			default: undefined
 	}
 
 	# Render a Visual instance
