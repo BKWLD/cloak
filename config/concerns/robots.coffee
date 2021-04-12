@@ -10,8 +10,8 @@ module.exports = ->
 	robots: do ->
 
 		# Allow all
-		if 'prod' == process.env.APP_ENV and
-		!process.env.URL?.includes 'netlify'
+		if process.env.APP_ENV?.includes('prod') and
+		!process.env.URL?.includes('netlify')
 			Sitemap: "#{process.env.URL}/sitemap.xml"
 			UserAgent: '*'
 			Allow: '/'
