@@ -81,11 +81,13 @@ export default
 					attrs:
 						media: '(orientation: landscape)'
 						srcset: makeSrcset @landscape.props.image
+						sizes: @sizes
 				}
 				{
 					attrs:
 						media: '(orientation: portrait)'
-						srcset: makeSrcset @portrait.props.image,
+						srcset: makeSrcset @portrait.props.image
+						sizes: @sizes
 				}
 			]
 
