@@ -64,6 +64,9 @@ export default
 
 		# Other types with default values in Craft visual that we want to be able
 		# to test for undefined-ness
+		transition:
+			type: String
+			default: undefined
 		intersectionOptions:
 			type: Object
 			default: undefined
