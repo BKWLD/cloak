@@ -7,10 +7,7 @@ import { makeImgixUrl } from '../services/helpers'
 
 # The srcset sizes that will be produced, whether by imgix or through Craft
 # transforms
-resizeWidths = [1920, 1440, 1024, 768, 425, 210]
-
-# Default placeholder color
-export defaultPlaceholderColor = '#f3f3f2'
+resizeWidths = process.env.SRCSET_WIDTHS || [1920, 1440, 1024, 768, 425, 210]
 
 # Make the list of base Visual props, manually merging all mixins
 baseProps = Visual.mixins.reduce (props, mixin) ->
@@ -88,8 +85,8 @@ export default
 			else image?['w' + resizeWidths[0]]
 
 		# Decide if there is a placeholder color
-		placeholderColor = if props.noPlaceholder
-		then null else defaultPlaceholderColor
+		placeholderColor = if props.noPlaceholder then null
+		else process.env.PLACEHOLDER_COLOR || '#f3f3f2'
 
 		# Figure out the aspect ratio
 		aspect = switch
@@ -205,7 +202,7 @@ export makeSrcset = (image, { webp, max } = {}) ->
 		resizeWidths.filter (size) -> size <= maxWidth
 
 	# Make the srcset string
-	srcSet = sizes.map (size) ->
+	sizes.map (size) ->
 
 		# Make URLs through imgix
 		if process.env.IMGIX_URL

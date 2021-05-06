@@ -46,6 +46,8 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | `pageTypenames` | Array of Craft `_typename` values for page sections. These will be queried nad turned into routes. |
 | `repoName` | The Sentry webpack plugin's [repo](https://github.com/getsentry/sentry-webpack-plugin#optionssetcommits) value, for example `Group Name / Project Name`. |
 | `imgixUrl` | For example, `https://project.imgix.net` |
+| `srcsetWidths` | Array of integer widths that are used to make the Craft Visual srcSet. |
+| `placeholderColor` | The default placeholder color for Craft Visual |
 
 ## Libraries
 
