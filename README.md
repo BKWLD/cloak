@@ -4,6 +4,11 @@ Opinionated Nuxt + Craft boilerplate.
 
 ![](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia4.giphy.com%2Fmedia%2Ffs616XzKDb6cyd7TMa%2Fgiphy-downsized.gif%3Fcid%3D6104955e248cc15d4c2aeca08bb88c9fb520d40e9552a715%26rid%3Dgiphy-downsized.gif)
 
+## Install
+
+1. Copy the [scaffold](./scaffold) contents to your project
+2. Make a package.json that includes Nuxt and Cloak: `yarn add nuxt @bkwld/cloak`
+
 ## Usage
 
 From your project's `nuxt.config.coffee`:

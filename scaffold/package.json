@@ -1,0 +1,17 @@
+{
+	"private": true,
+	"scripts": {
+		"dev": "yarn transpile && nuxt",
+		"build": "yarn transpile && nuxt build",
+		"start": "nuxt start",
+		"generate": "yarn transpile && nuxt generate --fail-on-error --target=static",
+		"transpile": "yarn transpile:coffee && yarn transpile:gql && yarn transpile:greenhouse",
+		"transpile:coffee": "coffee -c nuxt.config.coffee",
+		"transpile:gql": "yarn webpack --config node_modules/@bkwld/cloak/build/transpile-gql.coffee",
+		"transpile:watch": "coffee -cw nuxt.config.coffee"
+	},
+	"dependencies": {
+		"@bkwld/cloak": "^0",
+		"nuxt": "^2"
+	}
+}
