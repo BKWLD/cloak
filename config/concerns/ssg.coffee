@@ -1,7 +1,6 @@
 ###
 Prepare to statically generate the site using routes from a Craft query
 ###
-getCraftPages = require '../../build/get-craft-pages'
 { isGenerating } = require '../utils'
 module.exports = ({ pageTypenames }) ->
 
@@ -27,4 +26,7 @@ module.exports = ({ pageTypenames }) ->
 		subFolders: false
 
 		# Add dynamic routes
-		routes: -> getCraftPages pageTypenames
+		routes: ->
+			return unless pageTypenames?.length
+			getCraftPages = require '../../build/get-craft-pages'
+			getCraftPages pageTypenames
