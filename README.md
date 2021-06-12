@@ -1,6 +1,6 @@
 # Cloak
 
-Opinionated Nuxt + Craft boilerplate.
+Opinionated Nuxt boilerplate with support for Craft and Contentful.
 
 ![](https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fmedia4.giphy.com%2Fmedia%2Ffs616XzKDb6cyd7TMa%2Fgiphy-downsized.gif%3Fcid%3D6104955e248cc15d4c2aeca08bb88c9fb520d40e9552a715%26rid%3Dgiphy-downsized.gif)
 
@@ -44,15 +44,27 @@ module.exports = mergeConfig boilerplate,
 
 These are options you can pass to `makeBoilerplate`.  See the [source code](config/boilerplate.coffee) for defaults.
 
+#### General
+
 | Property | Description |
 | -------- | ----------- |
 | `siteName` | Name of site gets prepended to the `<title>` and used in PWA manifest. |
 | `polyfills` | Array of [polyfill.io](https://polyfill.io/) keywords, for example `URL`. |
-| `pageTypenames` | Array of Craft `_typename` values for page sections. These will be queried nad turned into routes. |
 | `repoName` | The Sentry webpack plugin's [repo](https://github.com/getsentry/sentry-webpack-plugin#optionssetcommits) value, for example `Group Name / Project Name`. |
+
+#### CMS
+
+| Property | Description |
+| -------- | ----------- |
+| `pageTypenames` | Array of Craft `_typename` values or Contentful `contentType` ids for models taht represent pages. These will be queried and turned into routes. |
+
+#### Visual
+
+| Property | Description |
+| -------- | ----------- |
 | `imgixUrl` | For example, `https://project.imgix.net` |
-| `srcsetWidths` | Array of integer widths that are used to make the Craft Visual srcSet. |
-| `placeholderColor` | The default placeholder color for Craft Visual |
+| `srcsetWidths` | Array of integer widths that are used to make the Visual srcSet. |
+| `placeholderColor` | The default placeholder color for Visual |
 
 ## Libraries
 
