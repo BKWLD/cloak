@@ -18,6 +18,7 @@ From your project's `nuxt.config.coffee`:
 { mergeConfig, makeBoilerplate } = require '@bkwld/cloak'
 boilerplate = makeBoilerplate
   siteName: 'My Site'
+  cms: 'craft'
   pageTypenames: ['towers_towers_Entry']
 
 # Merge project specific config with cloak boilerplate
@@ -56,6 +57,7 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 
 | Property | Description |
 | -------- | ----------- |
+| `cms` | May be empty, `craft`, or `contentful`. |
 | `pageTypenames` | Array of Craft `_typename` values or Contentful `contentType` ids for models taht represent pages. These will be queried and turned into routes. |
 
 #### Visual

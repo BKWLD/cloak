@@ -2,8 +2,8 @@
 Add configuration required to interact with Craft headlessly
 ###
 { join } = require 'path'
-module.exports = ->
-	return unless process.env.CMS_ENDPOINT
+module.exports = ({ cms }) ->
+	return unless cms == 'craft' and process.env.CMS_ENDPOINT
 
 	# The GrapgQL endpoint
 	env: CMS_ENDPOINT: process.env.CMS_ENDPOINT
