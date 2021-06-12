@@ -26,7 +26,10 @@ export getEntries = (payload) ->
 	data = await execute payload
 	return Object.values(data)[0]?.items
 
-# Execute a single entry
+# Execute a single entry and, if the query was for a collection, get the first
+# item in the collection. Otherwise, it's assumed the query was for a single
+# entry, so just resturn that result.
 export getEntry = (payload) ->
 	data = await execute payload
-	return Object.values(data)[0]
+	result = Object.values(data)[0]
+	return result?.items?[0] || result
