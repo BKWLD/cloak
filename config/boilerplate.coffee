@@ -9,9 +9,9 @@ defaults = require 'lodash/defaults'
 # Concerns that make up the whole boilerplate config
 concerns = [
 	require './concerns/axios'
+	require './concerns/cms'
 	require './concerns/coffeescript'
 	require './concerns/components'
-	require './concerns/craft'
 	require './concerns/gtm'
 	require './concerns/helpers'
 	require './concerns/meta'
