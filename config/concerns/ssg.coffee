@@ -32,3 +32,8 @@ module.exports = ({ cms, pageTypes }) ->
 				when 'craft' then  require '../../build/get-craft-pages'
 				when 'contentful' then require '../../build/get-contentful-pages'
 			getPages pageTypes
+
+		# Don't re-build for changes to fontagon
+		cache: ignore: [
+			'**/fontagon/dist/*'
+		]
