@@ -16,7 +16,7 @@ module.exports = ({ pageTypenames }) ->
 
 		# Remove routes that have robots disabled
 		routes: ->
-			return unless pageTypenames?.length
+			return [] unless pageTypenames?.length
 			getCraftPages = require '../../build/get-craft-pages'
 			(await getCraftPages pageTypenames).filter (route) ->
 

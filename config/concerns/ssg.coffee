@@ -27,6 +27,6 @@ module.exports = ({ pageTypenames }) ->
 
 		# Add dynamic routes
 		routes: ->
-			return unless pageTypenames?.length
+			return [] unless pageTypenames?.length
 			getCraftPages = require '../../build/get-craft-pages'
 			getCraftPages pageTypenames
