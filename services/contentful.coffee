@@ -3,6 +3,16 @@ Make Contentful GraphQL adapter
 ###
 import axios from 'axios'
 
+# Enable retrying of requests. This may occur because of Contentful rate
+# limiting that can cause issues during SSG. A better implementation would
+# use the `X-Contentful-RateLimit-Reset` heder to delay by the number of seconds
+# that Contentful is asking to delay by.
+# https://www.contentful.com/developers/docs/references/graphql/#/introduction/api-rate-limits
+import axiosRetry from 'axios-retry'
+axiosRetry axios,
+	retries: 5
+	retryDelay: axiosRetry.exponentialDelay
+
 # Run the API query
 export execute = (payload) ->
 
