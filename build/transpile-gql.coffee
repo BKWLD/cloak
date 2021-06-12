@@ -3,10 +3,11 @@ A webpack config that can converts GraphQL into importable JS
 ###
 
 # Deps
-{ resolve } = require 'path'
+path = require 'path'
+glob = require 'glob'
 
 # Paths
-nuxtQueries = resolve process.cwd(), 'queries'
+nuxtQueries = path.resolve process.cwd(), 'queries'
 
 # Webpack config
 module.exports =
@@ -14,13 +15,16 @@ module.exports =
 	# Only rendering for production
 	mode: 'production'
 
-	# GraphQL files that will be built
-	entry:
-		'craft-pages': resolve nuxtQueries, 'craft-pages.gql'
+	# Blindly build all gql files from the queries directory.
+	# https://stackoverflow.com/a/45827671/59160
+	entry: glob.sync("#{nuxtQueries}/*.gql").reduce (entry, file) ->
+		entry[path.parse(file).name] = file
+		return entry
+	, {}
 
 	# Where to write files
 	output:
-		path: resolve nuxtQueries, 'compiled'
+		path: path.resolve nuxtQueries, 'compiled'
 		filename: '[name].js'
 		libraryTarget: 'commonjs2' # Necessary to get import-able
 
