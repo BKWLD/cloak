@@ -18,7 +18,7 @@ export default
 		create 'div', {
 			...data
 
-			# Automatically parse anchors
+			# Automatically add directives
 			directives: [
 				{ name: 'parse-anchors' }
 				{ name: 'unorphan' } if props.unorphan
