@@ -47,7 +47,7 @@ module.exports = (options) ->
 		]
 
 		# Craft _typenames for page routes
-		pageTypenames: []
+		pageTypes: []
 
 		# Sentry repo name, like "Group Name / Repo Name"
 		repoName: null

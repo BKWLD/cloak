@@ -2,7 +2,7 @@
 Prepare to statically generate the site using routes from a Craft query
 ###
 { isGenerating } = require '../utils'
-module.exports = ({ cms, pageTypenames }) ->
+module.exports = ({ cms, pageTypes }) ->
 
 	# Always show output
 	build: quiet: false
@@ -27,8 +27,8 @@ module.exports = ({ cms, pageTypenames }) ->
 
 		# Add dynamic routes
 		routes: ->
-			return [] unless pageTypenames?.length
+			return [] unless pageTypes?.length
 			getPages = switch cms
 				when 'craft' then  require '../../build/get-craft-pages'
 				when 'contentful' then require '../../build/get-contentful-pages'
-			getPages pageTypenames
+			getPages pageTypes

@@ -2,7 +2,7 @@
 Configure the sitemap to be generated from the routes config
 ###
 { isGenerating } = require '../utils'
-module.exports = ({ cms, pageTypenames }) ->
+module.exports = ({ cms, pageTypes }) ->
 	return unless isGenerating
 
 	# Add the module
@@ -16,11 +16,11 @@ module.exports = ({ cms, pageTypenames }) ->
 
 		# Remove routes that have robots disabled
 		routes: ->
-			return [] unless pageTypenames?.length
+			return [] unless pageTypes?.length
 			getPages = switch cms
 				when 'craft' then require '../../build/get-craft-pages'
 				when 'contentful' then require '../../build/get-contentful-pages'
-			(await getPages pageTypenames).filter (route) ->
+			(await getPages pageTypes).filter (route) ->
 
 				# Allow simple string routes
 				return route if typeof route == 'string'

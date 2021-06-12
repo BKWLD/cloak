@@ -9,13 +9,13 @@ getCraftPages = require path.join process.cwd(), '/queries/compiled/craft-pages'
 { isGenerating } = require '../config/utils'
 
 # Make the list of routes
-module.exports = memoize (pageTypenames) ->
-	return [] unless isGenerating and pageTypenames.length
+module.exports = memoize (pageTypes) ->
+	return [] unless isGenerating and pageTypes.length
 	routes = []
 
 	# Loop through type combinations and add to
 	console.log('ℹ Fetching SSG data')
-	for typename in pageTypenames
+	for typename in pageTypes
 		results = await getEntriesForTypename typename
 
 		# Make the list of routes
