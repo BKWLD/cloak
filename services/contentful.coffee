@@ -3,30 +3,39 @@ Make Contentful GraphQL adapter
 ###
 import axios from 'axios'
 
-# Enable retrying of requests. This may occur because of Contentful rate
-# limiting that can cause issues during SSG. A better implementation would
-# use the `X-Contentful-RateLimit-Reset` heder to delay by the number of seconds
-# that Contentful is asking to delay by.
+# Make a Contentful client
+client = axios.create
+	baseURL: 'https://graphql.contentful.com/content/v1/spaces/' +
+		process.env.CONTENTFUL_SPACE
+	headers:
+		'Content-Type': 'application/json'
+		'Authorization': 'Bearer ' + process.env.CONTENTFUL_ACCESS_TOKEN
+
+# Retry requests when met with Contentful API rate limits.
 # https://www.contentful.com/developers/docs/references/graphql/#/introduction/api-rate-limits
-import axiosRetry from 'axios-retry'
-axiosRetry axios,
-	retries: 5
-	retryDelay: axiosRetry.exponentialDelay
+# This is based on https://github.com/compwright/axios-retry-after
+# I tried using https://github.com/softonic/axios-retry but it wasn't retrying
+# by default and I noticed a number of PRs for adding support for 429s. This
+# requires no dependencies and is easier to understand.
+client.interceptors.response.use null, (error) ->
+
+	# Check for header with amount do delay
+	delay = error.response?.headers?['x-contentful-ratelimit-reset']
+	throw error unless delay
+	console.log "Delaying #{delay}s for Contentful API rate limit"
+
+	# Wait the delay and re-execute. Not entirely sure why client(error.config)
+	# works but it does.
+	await new Promise (resolve) -> setTimeout resolve, delay * 1000
+	return client(error.config)
 
 # Run the API query
 export execute = (payload) ->
 
 	# Excute the query
-	response = await axios
-		url: 'https://graphql.contentful.com/content/v1/spaces/' +
-			process.env.CONTENTFUL_SPACE
+	response = await client
 		method: 'post'
-		headers:
-			'Content-Type': 'application/json'
-			'Authorization': 'Bearer ' + process.env.CONTENTFUL_ACCESS_TOKEN
-
-		# Should have query and maybe variables data
-		data: payload
+		data: payload # Should have query and optionally variables
 
 	# Return data
 	return response.data.data
