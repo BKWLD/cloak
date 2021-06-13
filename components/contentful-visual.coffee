@@ -1,12 +1,10 @@
-# Load cloak-visual
+# Deps
 import CloakVisual, { resizeWidths } from './cloak-visual'
+import { makeContentfulImageUrl } from '../services/helpers'
 
-# We may be using imgix
-import { makeImgixUrl } from '../services/helpers'
-
-# Map Craft image objects into params for visual
+# Map Contentful image objects into params for visual
 export default
-	name: 'CraftVisual'
+	name: 'ContentfulVisual'
 	functional: true
 
 	# Support all CloakVisual props
@@ -15,17 +13,13 @@ export default
 	# Render a Visual instance
 	render: (create, { props, data, children, scopedSlots }) ->
 
-		# Get the assets, either of which is optional
-		image = getAssetObject props.image
-		video = getAssetObject props.video
+		# Make shorter accessors
+		image = props.image
+		video = props.video
 
 		# Get the image src, ignoring srcset for now.  We're using the
-		imageUrl = if process.env.IMGIX_URL
-			if props.natural then makeImgixUrl image?.path
-			else makeImgixUrl image?.path, resizeWidths[0]
-		else
-			if props.natural then image?.url
-			else image?['w' + resizeWidths[0]]
+		imageUrl = if props.natural then image?.url
+		else makeContentfulImageUrl image?.url, resizeWidths[0]
 
 		# Figure out the aspect ratio
 		aspect = switch
@@ -65,36 +59,22 @@ export default
 				width
 				height
 				maxWidth
-				objectPosition: makeObjectPosition props.objectPosition, image
 
 				# Accessibility
-				alt: image?.title || video?.title
+				alt: image?.description ||
+					image?.title ||
+					video?.description ||
+					video?.title
 
 		# Passthrough slot
 		}}, children
-
-# Craft returns assets in an array, so get the first asset in the list
-export getAssetObject = (asset) ->
-	if Array.isArray asset
-		if asset.length
-		then return asset[0]
-		else return null
-	return asset
-
-export getObjectPositionFromFocalPoint = (focalPoint) ->
-	return unless focalPoint?.length == 2
-	"#{focalPoint[0] * 100}% #{focalPoint[1] * 100}%"
-
-# Make a CSS background position value
-makeObjectPosition = (objectPosition, image) ->
-	objectPosition || getObjectPositionFromFocalPoint(image?.focalPoint) || '50% 50%'
 
 # The srcset values need to match those used in transforms in the query
 export makeSrcset = (image, { webp, max } = {}) ->
 	return unless image
 
 	# Passthru gifs, currently ignoring imgix for this
-	if image.mimeType == 'image/gif' then return image.url
+	if image.contentType == 'image/gif' then return image.url
 
 	# Don't output src options that are greater then a 2X version of the max width
 	sizes = unless max then resizeWidths
@@ -102,19 +82,10 @@ export makeSrcset = (image, { webp, max } = {}) ->
 		maxWidth = 2 * parseInt max
 		resizeWidths.filter (size) -> size <= maxWidth
 
+	# Set webp format
+	options = if webp then { format: 'webp' }
+
 	# Make the srcset string
 	sizes.map (size) ->
-
-		# Make URLs through imgix
-		if process.env.IMGIX_URL
-			"#{encodeURI(makeImgixUrl(image.path, size))} #{size}w"
-
-		# Else use Craft transforms
-		else
-			srcKey = "w#{size}"
-			srcKey += '_webp' if webp
-			"#{url} #{size}w" if url = image[srcKey]
-
-	# Filter out empties, for instance webps will be empty for svgs
-	.filter (val) -> !!val
+		"#{encodeURI(makeContentfulImageUrl(image.url, size, options))} #{size}w"
 	.join ','

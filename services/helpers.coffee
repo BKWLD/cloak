@@ -78,12 +78,30 @@ export extendApp = (app, mixin) ->
 	app.mixins = [] unless app.mixins
 	app.mixins.push mixin
 
-# Format a URL for imgix
+# Format a URL for Imgix
 export makeImgixUrl = (path, width) ->
 	return unless imgixUrl = process.env.IMGIX_URL
 	return unless path
 	return "#{imgixUrl}/#{path}" unless width
 	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&auto=compress"
+
+# Format a URL for Contentful
+export makeContentfulImageUrl = (url, width, {
+	height, format, quality, fit
+} = {}) ->
+	return url unless url && width
+
+	# Create query params
+	params = {}
+	params.w = width
+	params.h = height if height
+	params.fm = format if format
+	params.q = quality if quality
+	params.fl = 'progressive' if format == 'jpg'
+	params.fit = fit if fit
+
+	# Make the URL
+	"#{url}?#{new URLSearchParams(params)}"
 
 # Capitalize the first letter of a word
 # https://flaviocopes.com/how-to-uppercase-first-letter-javascript/

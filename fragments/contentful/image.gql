@@ -1,0 +1,11 @@
+# A standard image asset fragment
+# https://www.contentful.com/developers/docs/references/graphql/#/reference/schema-generation/assets
+fragment image on Asset {
+	sys { id }
+	contentType
+	title
+	description
+	width
+	height
+	url
+}
