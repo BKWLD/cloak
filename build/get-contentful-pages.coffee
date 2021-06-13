@@ -1,7 +1,6 @@
 ###
 Query for all Contentful pages given an array of contentTypes
 ###
-path = require 'path'
 memoize = require 'lodash/memoize'
 flatten = require 'lodash/flatten'
 upperFirst = require 'lodash/upperFirst'
