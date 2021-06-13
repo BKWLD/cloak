@@ -33,7 +33,8 @@ module.exports = ({ cms, pageTypes }) ->
 				when 'contentful' then require '../../build/get-contentful-pages'
 			getPages pageTypes
 
-		# Don't re-build for changes to fontagon
+		# Things that shouldn't trigger a rebuild
 		cache: ignore: [
-			'**/fontagon/dist/*'
+			'**/fontagon/dist/*' # Fontagon writes exported stuff here
+			'build/*' # Code related to SSG
 		]
