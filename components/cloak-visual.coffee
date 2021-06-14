@@ -91,6 +91,7 @@ export default
 		# Use the width as the size if passed
 		sizes = if !props.sizes and props.width
 		then "#{parseInt(props.width)}px"
+		else props.sizes
 
 		# Warn developers to specify a sizes prop
 		if props.image and !sizes and process.env.APP_ENV == 'dev'
