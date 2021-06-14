@@ -43,7 +43,7 @@ export execute = (payload) ->
 # Execute a list of entries
 export getEntries = (payload) ->
 	data = await execute payload
-	return Object.values(data)[0]?.items
+	return Object.values(data)[0]?.items.map flattenEntry
 
 # Execute a single entry and, if the query was for a collection, get the first
 # item in the collection. Otherwise, it's assumed the query was for a single
@@ -51,4 +51,30 @@ export getEntries = (payload) ->
 export getEntry = (payload) ->
 	data = await execute payload
 	result = Object.values(data)[0]
-	return result?.items?[0] || result
+	return flattenEntry result?.items?[0] || result
+
+# Contentful nests each sub collection in an items property. This removes all
+# of the items properties and adds sys.id as the id so:
+# - tower.sys.id -> tower.id
+# - tower.blocks.items[0].title -> tower.blocks[0].title
+# - tower.blocks.items[0].sys.id -> tower.blocks[0].id
+export flattenEntry = (entry) ->
+	Object.keys(entry).reduce (obj, key) ->
+		switch
+
+			# Flatten some of the sys vars onto the obj itself
+			when key == 'sys'
+				obj.id = id if id = entry.sys.id
+				obj.createdAt = createdAt if createdAt = entry.sys.firstPublishedAt
+				obj.updatedAt = updatedAt if updatedAt = entry.sys.publishedAt
+
+			# Flatten `items` and recurse through children
+			when (items = entry[key]?.items) and Array.isArray items
+			then obj[key] = items.map flattenEntry
+
+			# Otherwise, passthrough the key/val
+			else obj[key] = entry[key]
+
+		# Return the entry obj
+		return obj
+	, {}
