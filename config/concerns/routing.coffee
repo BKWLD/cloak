@@ -1,7 +1,8 @@
 ###
 Add various helpers related to routing
 ###
-{ join } = require 'path'
+path = require 'path'
+{ existsSync } = require 'fs'
 module.exports = ->
 
 	# Add packages responsible for improving page transition handling
@@ -14,8 +15,9 @@ module.exports = ->
 	router: extendRoutes: (routes, resolve) ->
 
 		# Make the tower slug optional, so the root route will match
-		routes.find (route) -> route.name == 'tower'
-		.path = '/:tower*'
+		if existsSync path.join process.cwd(), 'pages/_tower.vue'
+			routes.find (route) -> route.name == 'tower'
+			.path = '/:tower*'
 
 		# Return new routes array
 		return routes
