@@ -1,13 +1,15 @@
 <!-- Conditionally render landscape or portrait visual instances -->
 
 <script lang='coffee'>
-import ContentfulVisual, { getAssetObject, makeSrcset } from './craft-visual'
+import ContentfulVisual, { makeSrcset } from './contentful-visual'
 import { ucFirst } from '../services/helpers'
 export default
 	name: 'ResponsiveContentfulVisual'
 	props: {
+
 		# Merge craft-visual props
 		...ContentfulVisual.props
+
 		# Make explicit landscape and portrait props
 		landscapeImage: Object|Array
 		portraitImage: Object|Array
@@ -81,7 +83,7 @@ export default
 		# mediaType: image|video
 		# viewportType: portrait|landscape
 		getAsset: (mediaType, viewportType) ->
-			getAssetObject @[viewportType + ucFirst(mediaType)]
+			@[viewportType + ucFirst(mediaType)]
 		# Make the aspect css style
 		makeAspectStyle: (viewportType) ->
 			return unless image = @[viewportType].props.image
