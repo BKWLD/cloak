@@ -7,7 +7,6 @@ module.exports = ->
 
 	# Add packages responsible for improving page transition handling
 	modules: [
-		'nuxt-page-transition-and-anchor-handler'
 		'vue-routing-anchor-parser/nuxt/module'
 	]
 
