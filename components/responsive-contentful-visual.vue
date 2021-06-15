@@ -5,6 +5,7 @@ import ContentfulVisual, { makeSrcset } from './contentful-visual'
 import { ucFirst } from '../services/helpers'
 export default
 	name: 'ResponsiveContentfulVisual'
+
 	props: {
 
 		# Merge craft-visual props
@@ -16,24 +17,32 @@ export default
 		landscapeVideo: Object|Array
 		portraitVideo: Object|Array
 	}
+
 	data: ->
 		mounted: false
 		isLandscape: null
+
 	mounted: ->
 		@isLanscapeMediaQuery = window.matchMedia '(orientation: landscape)'
 		@checkIsLandscape @isLanscapeMediaQuery
 		@isLanscapeMediaQuery.addListener @checkIsLandscape
 		@mounted = true
+
 	destroyed: ->
 		@isLanscapeMediaQuery?.removeListener @checkIsLandscape
+
 	computed:
+
 		# Visual configs
 		landscape: -> @makeConfig @getAsset('image', 'landscape'),
 			@getAsset('video', 'landscape')
+
 		portrait: -> @makeConfig @getAsset('image', 'portrait'),
 			@getAsset('video', 'portrait')
+
 		# Do we have unique landscape and portrait configs?
 		isResponsive: -> !!(@landscape and @portrait)
+
 		# The config used when there is both landscape and portrait assets. The video
 		# prop will only be set once the viewport can be measured.
 		responsiveConfig: ->
@@ -49,6 +58,7 @@ export default
 					'--landscape-aspect': @makeAspectStyle 'landscape'
 					'--portrait-aspect': @makeAspectStyle 'portrait'
 			}
+
 		# If there are both landscape and portrait videos, wait till the page is
 		# mounted to decide which to show.  This prevents issues with differences
 		# between SSR and client. Otherwise, just use whichever we have.
@@ -59,6 +69,7 @@ export default
 				return unless @mounted
 				if @isLandscape then landscape else portrait
 			else landscape || portrait
+
 		# Make responsive sources
 		responsiveSources: ->
 			return unless @isResponsive
@@ -76,19 +87,24 @@ export default
 						sizes: @sizes
 				}
 			]
+
 	methods:
+
 		# Store whether orientation is currently landscape
 		checkIsLandscape: (e) -> @isLandscape = e.matches
+
 		# Get the specified asset
 		# mediaType: image|video
 		# viewportType: portrait|landscape
 		getAsset: (mediaType, viewportType) ->
 			@[viewportType + ucFirst(mediaType)]
+
 		# Make the aspect css style
 		makeAspectStyle: (viewportType) ->
 			return unless image = @[viewportType].props.image
 			aspect = image.width / image.height
 			return "#{1 / aspect * 100}%"
+
 		# Make the config object for the create function by keeping all data and
 		# props except for replacing landscape and portrait with the asset itself
 		makeConfig: (image, video) ->
@@ -106,6 +122,7 @@ export default
 
 	# Make the appropriate visual instance
 	render: (create) ->
+
 		# Create visual for the current viewport width
 		if @landscape || @portrait
 			unless @isResponsive
@@ -115,6 +132,7 @@ export default
 				scopedSlots: ['image-source']: =>
 					@responsiveSources.map (data) -> create 'source', data
 			}, @$slots.default
+
 		# No assets were discovered, so explicitly clear the asset props
 		else create ContentfulVisual, { props: {
 			...@$props
@@ -126,10 +144,12 @@ export default
 <!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 <style lang='stylus' scoped>
+
 // Add responsive aspect ratio
 .responsive-visual >>> .vv-aspect-shim
 	@media(orientation landscape)
 		padding-top var(--landscape-aspect) !important
 	@media(orientation portrait)
 		padding-top var(--portrait-aspect) !important
+
 </style>
