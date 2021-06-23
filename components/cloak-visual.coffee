@@ -22,10 +22,6 @@ export default
 	props: {
 		...baseProps
 
-		# A support Contentful objects with width, height, etc
-		image: Object | Array
-		video: Object | Array
-
 		# Support additional types
 		aspect: Number | String | Boolean
 

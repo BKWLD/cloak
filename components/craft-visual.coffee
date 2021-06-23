@@ -10,7 +10,13 @@ export default
 	functional: true
 
 	# Support all CloakVisual props
-	props: CloakVisual.props
+	props: {
+		...CloakVisual.props
+
+		# A support Craft objects that typically arrive as arrays
+		image: Object | Array
+		video: Object | Array
+	}
 
 	# Render a Visual instance
 	render: (create, { props, data, children, scopedSlots }) ->
