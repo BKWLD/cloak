@@ -2,7 +2,10 @@
 Make Contentful GraphQL adapter
 ###
 import axios from 'axios'
-import { nonEmpty } from './helpers'
+
+# Not importing this from ./helpers because the dependency was causing issues
+# when services/contentful was imported from a Nuxt module
+nonEmpty = (array) -> array.filter (val) -> !!val
 
 # Make a Contentful client
 client = axios.create
