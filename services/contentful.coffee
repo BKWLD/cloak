@@ -53,6 +53,12 @@ export getEntry = (payload) ->
 	result = Object.values(data)[0]
 	return flattenEntry result?.items?[0] || result
 
+# Execute a query that gets multiple collections, and return the flattened collections.
+export getCollections = (payload) ->
+	data = await execute payload
+	Object.keys(data).forEach (key) -> data[key] = data[key]?.items.map flattenEntry
+	return data
+
 # Contentful nests each sub collection in an items property. This removes all
 # of the items properties and adds sys.id as the id so:
 # - tower.sys.id -> tower.id
