@@ -2,6 +2,7 @@
 Make Contentful GraphQL adapter
 ###
 import axios from 'axios'
+import { nonEmpty } from './helpers'
 
 # Make a Contentful client
 client = axios.create
@@ -43,7 +44,7 @@ export execute = (payload) ->
 # Execute a list of entries
 export getEntries = (payload) ->
 	data = await execute payload
-	return Object.values(data)[0]?.items.map flattenEntry
+	return flattenEntries Object.values(data)[0]?.items
 
 # Execute a single entry and, if the query was for a collection, get the first
 # item in the collection. Otherwise, it's assumed the query was for a single
@@ -53,11 +54,19 @@ export getEntry = (payload) ->
 	result = Object.values(data)[0]
 	return flattenEntry result?.items?[0] || result
 
-# Execute a query that gets multiple collections, and return the flattened collections.
+# Execute a query that gets multiple collections, and return the flattened
+# collections.
 export getCollections = (payload) ->
 	data = await execute payload
-	Object.keys(data).forEach (key) -> data[key] = data[key]?.items.map flattenEntry
+	Object.keys(data).forEach (key) ->
+		data[key] = flattenEntries data[key]?.items
 	return data
+
+# Remove empty items (like when using the non-preview GraphQL endpoint and
+# there are draft entries in a reference field).
+export flattenEntries = (items) ->
+	return [] unless items
+	nonEmpty(items).map flattenEntry
 
 # Contentful nests each sub collection in an items property. This removes all
 # of the items properties and adds sys.id as the id so:
@@ -76,7 +85,7 @@ export flattenEntry = (entry) ->
 
 			# Flatten `items` and recurse through children
 			when (items = entry[key]?.items) and Array.isArray items
-			then obj[key] = items.map flattenEntry
+			then obj[key] = flattenEntries items
 
 			# Otherwise, passthrough the key/val
 			else obj[key] = entry[key]
