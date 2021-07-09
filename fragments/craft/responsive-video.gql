@@ -1,0 +1,7 @@
+#import './video.gql'
+
+fragment responsiveVideo on responsiveVideo_BlockType {
+	id
+	landscape { ...video }
+	portrait { ...video }
+}
