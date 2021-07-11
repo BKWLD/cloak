@@ -14,6 +14,7 @@ concerns = [
 	require './concerns/components'
 	require './concerns/credits'
 	require './concerns/gtm'
+	require './concerns/fontagon'
 	require './concerns/helpers'
 	require './concerns/meta'
 	require './concerns/perf'

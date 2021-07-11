@@ -1,0 +1,39 @@
+// Overrideable helper to finding the fonts
+fontagon-font-path ?= '~assets/fonts/fontagon/dist'
+
+// Load the font
+@font-face
+	font-family 'fontagon'
+	src url(fontagon-font-path + '/fontagon.woff2') format('woff2'), url(fontagon-font-path + '/fontagon.woff') format('woff')
+	font-weight normal
+	font-style normal
+	font-display block
+
+// Make icon class
+[class^="{{classPrefix}}-"], [class*=" {{classPrefix}}-"]
+	font-family '{{fontName}}' !important
+	speak never
+	font-style normal
+	font-weight normal
+	font-variant normal
+	text-transform none
+	line-height 1
+
+	/* Support for all WebKit browsers. */
+	-webkit-font-smoothing antialiased
+	/* Support for Safari and Chrome. */
+	text-rendering optimizeLegibility
+
+	/* Support for Firefox. */
+	-moz-osx-font-smoothing grayscale
+
+	/* Support for IE. */
+	font-feature-settings 'liga'
+
+// Begin writing font classes
+
+{{#each codepoints}}
+.{{../classPrefix}}-{{@key}}
+	&:before
+		content "\\{{this}}"
+{{/each}}
