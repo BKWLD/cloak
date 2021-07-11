@@ -1,0 +1,6 @@
+#import "./seo.gql"
+
+# Used for global SEO fallbacks
+fragment defaultSeo on defaultSeo_GlobalSet {
+	seo { ...seo }
+}

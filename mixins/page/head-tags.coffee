@@ -11,14 +11,18 @@ export default
 
 		# Make accessor for seo data which may live in a supertable or as
 		# individaual fields on the page itself
-		seo: -> @page.seo?[0] || {
-			metaTitle: @page.metaTitle
-			metaDescription: @page.metaDescription
-			metaImage: @page.metaImage
-			robots: @page.robots
-		}
+		defaultSeo: -> @$store?.state?.globals?.defaultSeo?.seo?[0]
+		pageSeo: -> @page?.seo?[0]
+		seo: ->
+			metaTitle: @pageSeo?.metaTitle || @defaultSeo.metaTitle
+			metaDescription: @pageSeo?.metaDescription || @defaultSeo.metaDescription
+			metaImage: @pageSeo?.metaImage || @defaultSeo.metaImage
+			robots: @pageSeo?.robots || @defaultSeo.robots
 
 	methods:
+
+		# Helper to get SEO object from a source
+		getSeo: (source) -> @source?.seo?[0]
 
 		# Helper to make head tags. Passed in props are only used if explicit meta
 		# values aren't found
