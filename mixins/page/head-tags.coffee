@@ -13,11 +13,6 @@ export default
 		# individaual fields on the page itself
 		defaultSeo: -> @$store?.state?.globals?.defaultSeo?.seo?[0]
 		pageSeo: -> @page?.seo?[0]
-		seo: ->
-			metaTitle: @pageSeo?.metaTitle || @defaultSeo.metaTitle
-			metaDescription: @pageSeo?.metaDescription || @defaultSeo.metaDescription
-			metaImage: @pageSeo?.metaImage || @defaultSeo.metaImage
-			robots: @pageSeo?.robots || @defaultSeo.robots
 
 	methods:
 
@@ -25,18 +20,20 @@ export default
 		getSeo: (source) -> @source?.seo?[0]
 
 		# Helper to make head tags. Passed in props are only used if explicit meta
-		# values aren't found
+		# values aren't found.  The expectation is that these values are fallbacks.
 		buildHead: ({ title, description, image } = {}) ->
 
 			# If no page, like on error pages, abort
 			return unless @page
 
 			# Look for meta tag values
-			title = @seo.metaTitle or @page.title or title
-			description = @seo.metaDescription or description
-			image = switch
-				when @seo.metaImage?.length then @seo.metaImage
-				when image?.length then image
+			title = @pageSeo.metaTitle or @page.title or title or
+				@defaultSeo.metaTitle
+			description = @pageSeo.metaDescription or description or
+				@defaultSeo.metaDescription
+			image = img(@pageSeo.metaImage) or img(image) or
+				img(@defaultSeo.metaImage)
+			robots = @pageSeo.robots or @defaultSeo.robots
 
 			# Create the object, filtering empties
 			title: title
@@ -49,5 +46,8 @@ export default
 				@$metaTag 'og:title', title
 				@$metaTag 'description', description
 				@$metaTag 'og:image', image
-				@$metaTag 'robots', @seo.robots?.join ', '
+				@$metaTag 'robots', robots?.join ', '
 			].filter (tag) -> !!tag?.content
+
+# A helper for accessing image values that may be part of an Array with Craft
+img = (field) -> field?[0]?.url or field
