@@ -6,8 +6,7 @@ Opinionated Nuxt boilerplate with support for Craft and Contentful.
 
 ## Install
 
-1. Copy the [scaffold](./scaffold) contents to your project
-2. Make a package.json that includes Nuxt and Cloak: `yarn add nuxt @bkwld/cloak`
+The recommended way to use Cloak is to install it with `yarn create cloak-app`.  This command use [`create-cloak-app`](https://github.com/BKWLD/create-cloak-app) and will scaffold a new Nuxt app that uses Cloak.
 
 ## Usage
 
