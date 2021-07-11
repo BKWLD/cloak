@@ -19,14 +19,13 @@ const getEntries = `query getRedirects {
 
 // Trigger after the static files are copied to the dist, that's the version
 // that will get edited
-export default function redirects() {
-	this.nuxt.hook('generate:distCopied', async function (builder) {
+export default function() {
+	this.nuxt.hook('generate:distCopied', async (builder) => {
 		console.log('  Adding server side redirects');
 
 		// Open up _redirects
-		const file = resolve(__dirname, '../dist', '_redirects')
-		let redirects = ''
-		if (existsSync(file)) redirects = readFileSync(file, 'utf8')
+		const file = resolve(this.nuxt.options.srcDir, 'dist/_redirects')
+		let redirects = existsSync(file) ? readFileSync(file, 'utf8') : ''
 
 		// Fetch the server side redirects
 		const response = await axios({
