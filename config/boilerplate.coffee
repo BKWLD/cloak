@@ -12,6 +12,7 @@ concerns = [
 	require './concerns/cms'
 	require './concerns/coffeescript'
 	require './concerns/components'
+	require './concerns/credits'
 	require './concerns/gtm'
 	require './concerns/helpers'
 	require './concerns/meta'
