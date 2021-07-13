@@ -11,8 +11,8 @@ export default
 
 		# Make accessor for seo data which may live in a supertable or as
 		# individaual fields on the page itself
-		defaultSeo: -> @$store?.state?.globals?.defaultSeo?.seo?[0]
-		pageSeo: -> @page?.seo?[0]
+		defaultSeo: -> @$store?.state?.globals?.defaultSeo?.seo?[0] || {}
+		pageSeo: -> @page?.seo?[0] || {}
 
 	methods:
 
