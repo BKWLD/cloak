@@ -33,9 +33,8 @@ export default
 			when !props.aspect? then image?.width / image?.height
 			else props.aspect
 
-		# If props.natural == true, then pass through natural image width.  Height will be controlled by aspect-shim.
-		# If props.natural == false, then pass through props.
-		{ width, height } = if props.natural and image then {width: image.width, height: null} else props
+		# Passthrough the width and height
+		{ width, height } = if props.natural and image then image else props
 
 		# Apply a max-width if no upscale is set
 		maxWidth = if props.noUpscale then image?.width
