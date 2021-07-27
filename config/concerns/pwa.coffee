@@ -24,3 +24,4 @@ module.exports = ({ siteName }) ->
 		ogTitle: ''
 		ogDescription: ''
 		ogImage: ''
+		author: ''

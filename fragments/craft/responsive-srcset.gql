@@ -1,0 +1,7 @@
+#import './srcset.gql'
+
+fragment responsiveSrcset on responsiveImage_BlockType {
+	id
+	landscape { ...srcset }
+	portrait { ...srcset }
+}

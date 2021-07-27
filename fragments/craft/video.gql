@@ -1,0 +1,7 @@
+# Fields needed for a video asset
+fragment video on AssetInterface {
+	id
+	title
+	mimeType
+	url
+}

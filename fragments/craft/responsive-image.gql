@@ -1,0 +1,7 @@
+#import './image.gql'
+
+fragment responsiveImage on responsiveImage_BlockType {
+	id
+	landscape { ...image }
+	portrait { ...image }
+}

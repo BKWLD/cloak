@@ -1,0 +1,7 @@
+# Standardized SEO block
+fragment seo on seo_BlockType {
+	metaTitle
+	metaDescription
+	metaImage { path, url }
+	robots
+}

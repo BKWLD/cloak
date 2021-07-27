@@ -37,6 +37,9 @@ export default
 			# Get explicit value
 			else getAssetObject @[viewportType + ucFirst(mediaType)]
 
+		# Passthru the logic that makes a srceset from the passed in prop
+		makeSrcset: makeSrcset
+
 	# Make the appropriate visual instance
 	render: (create) ->
 
