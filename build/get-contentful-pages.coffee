@@ -37,9 +37,7 @@ module.exports = memoize (pageTypes) ->
 makeQuery = ({ contentType, routeField = 'slug' }) ->
 	"""
 	query {
-		#{contentType}Collection(
-			limit: 1000
-		) {
+		#{contentType}Collection(limit: 1000) {
 			items {
 				... on #{upperFirst(contentType)} {
 					#{routeField}
