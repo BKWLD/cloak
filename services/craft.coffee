@@ -15,13 +15,8 @@ class CraftError extends Error
 # Run the API query
 export execute = (payload) ->
 
-	# Remove empty arrays from variables, which Craft treats as an explicit
-	# requirement.  Like having no tags, which is something I don't think we
-	# care about.
-	if payload.variables
-		payload.variables = pickBy payload.variables, (val, key) ->
-			return false if Array.isArray(val) and val.length == 0
-			return true
+	# Massage request
+	payload = cleanEmptyArrays restrictToSite payload
 
 	# Excute the query
 	response = await axios
@@ -41,6 +36,27 @@ export execute = (payload) ->
 
 	# Return data
 	return response.data.data
+
+# Remove empty arrays from variables, which Craft treats as an explicit
+# requirement.  Like having no tags, which is something I don't think we
+# care about.
+cleanEmptyArrays = (payload) ->
+	return payload unless payload.variables
+	payload.variables = pickBy payload.variables, (val, key) ->
+		return false if Array.isArray(val) and val.length == 0
+		return true
+	return payload
+
+# Restrict the query to a specific site, if one is defined
+restrictToSite = (payload) ->
+	return payload unless process.env.CMS_SITE
+	return {
+		...payload
+		variables: {
+			site: process.env.CMS_SITE || process.env.APP_ENV || 'dev'
+			...(payload.variables || {})
+		}
+	}
 
 # Get Craft preview tokens from the location
 getCraftPreviewTokens = ->
