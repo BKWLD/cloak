@@ -22,7 +22,7 @@ export nl2br = (str) -> str.replace /(?:\r\n|\r|\n)/g, '<br>'
 
 # Add two decimal places
 export twoDecimals = (val) ->
-	locale = navigator?.language || 'en-us'
+	locale = navigator?.language || 'en-US'
 	val.toLocaleString locale,
 		minimumFractionDigits: 2
 		maximumFractionDigits: 2
