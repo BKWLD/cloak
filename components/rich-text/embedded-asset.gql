@@ -1,0 +1,18 @@
+#impor "@bkwld/cloak/fragments/contentful/asset.gql"
+
+# Lookup an asset that is embedable in a rich-text field
+query($id: String!) {
+	asset(id: $id) {
+		sys { id }
+
+		# Treat all assets the same
+		... on Asset {
+			contentType
+			title
+			description
+			width
+			height
+			url
+		}
+	}
+}
