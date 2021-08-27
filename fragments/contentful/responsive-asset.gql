@@ -1,0 +1,9 @@
+#import "./image.gql"
+#import "./asset.gql"
+
+fragment responsiveAsset on ResponsiveAsset {
+	imageLandscape { ...image }
+	imagePortrait { ...image }
+	videoLandscape { ...asset }
+	videoPortrait { ...asset }
+}

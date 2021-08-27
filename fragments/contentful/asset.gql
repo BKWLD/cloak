@@ -1,0 +1,9 @@
+# An asset of any type
+# https://www.contentful.com/developers/docs/references/graphql/#/reference/schema-generation/assets
+fragment asset on Asset {
+	sys { id }
+	contentType
+	title
+	description
+	url
+}
