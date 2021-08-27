@@ -41,7 +41,7 @@ makeQuery = ({ contentType, routeField = 'slug' }) ->
 			items {
 				... on #{upperFirst(contentType)} {
 					#{routeField}
-					seo { robots }
+					robots
 				}
 			}
 		}
