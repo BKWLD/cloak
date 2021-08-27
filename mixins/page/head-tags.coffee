@@ -10,9 +10,11 @@ export default
 	computed:
 
 		# Make accessor for seo data which may live in a supertable or as
-		# individaual fields on the page itself
-		defaultSeo: -> @$store?.state?.globals?.defaultSeo?.seo?[0] || {}
-		pageSeo: -> @page?.seo?[0] || {}
+		# individual fields on the page itself
+		defaultSeo: ->
+			@$store?.state.globals?.defaultSeo?.seo?[0] or
+			@$store?.state.globals or {}
+		pageSeo: -> @page?.seo?[0] or @page or {}
 
 	methods:
 
@@ -50,4 +52,4 @@ export default
 			].filter (tag) -> !!tag?.content
 
 # A helper for accessing image values that may be part of an Array with Craft
-img = (field) -> field?[0]?.url or field
+img = (field) -> field?[0]?.url or field?.url or field
