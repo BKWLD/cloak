@@ -5,14 +5,20 @@ Add configuration required to interact with CMS choice
 module.exports = ({ cms }) ->
 	return unless cms
 
-	# The GrapgQL endpoint
-	env: switch cms
-		when 'craft'
-			CMS_ENDPOINT: process.env.CMS_ENDPOINT
-			CMS_SITE: process.env.CMS_SITE
-		when 'contentful'
-			CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE
-			CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN
+	env: {
+		CMS: cms
+
+		# CMS service connection info
+		...(
+			switch cms
+				when 'craft'
+					CMS_ENDPOINT: process.env.CMS_ENDPOINT
+					CMS_SITE: process.env.CMS_SITE
+				when 'contentful'
+					CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE
+					CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN
+		)
+	}
 
 	# Adds the cms service plugin
 	modules: [
