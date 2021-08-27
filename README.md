@@ -57,7 +57,7 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | Property | Description |
 | -------- | ----------- |
 | `cms` | May be empty, `craft`, or `contentful`. |
-| `pageTypes` (if Craft) | An array of Craft `_typename` values. If the `contnetful`, this should be an array of objects like this: `contentType` ids for models taht represent pages. These will be queried and turned into routes. |
+| `pageTypes` (if Craft) | An array of Craft `_typename` values. |
 | `pageTypes` (if Contentful) | An array of objects with the following properties: `contentType` (a Contentful contentType string), `routeField` (the field that holds the value you'll use in your route, defaults to `"slug"`), and `route` (a function that is passed the value from the `routeField` and which should return a route path). |
 
 #### Visual
