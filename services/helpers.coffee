@@ -56,17 +56,22 @@ export metaTag = (key, val, keyAttribute = null) ->
 # instance. The "component" argument should be a Vue component instance, like
 # returned from importing a single file component.
 export mountOnBody = (component, options = {}) -> new Promise (resolve) ->
-
-	# Set default options
-	unless options.parent then options.parent = window.$nuxt?.$root
-
-	# Mount the component
 	mount = ->
+
+		# Retry if nuxt not ready
+		unless window.$nuxt then return wait 50, mount
+
+		# Set default options
+		unless options.parent then options.parent = window.$nuxt.$root
+
+		# Mount the compenent
 		vm = new (Vue.extend component)(options)
 		vm.$mount()
 		document.body.appendChild vm.$el
 		resolve vm
-	if window.$nuxt then mount() else wait 50, mount
+
+	# Try to mount
+	mount()
 
 # Add JS initted class to document for use by in-viewport transitions
 export addInittedClass = ->
