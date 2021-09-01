@@ -10,14 +10,12 @@ module.exports = ({ repoName }) ->
 
 	# Configure Sentry
 	sentry:
-		publishRelease: true
-		attachCommits: false
 		config:
-			release: process.env.COMMIT_REF
+			release: process.env.COMMIT_REF # From Netlify
 			environment: process.env.SENTRY_ENVIRONMENT || process.env.APP_ENV
 			extra: # Netlify env variables
 				url: process.env.URL
 				deploy_url: process.env.DEPLOY_URL
-		webpackConfig: setCommits:
-			commit: process.env.COMMIT_REF
-			repo: repoName
+		publishRelease:
+			setCommits:
+				commit: process.env.COMMIT_REF # From Netlify

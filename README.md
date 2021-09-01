@@ -50,7 +50,6 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | -------- | ----------- |
 | `siteName` | Name of site gets prepended to the `<title>` and used in PWA manifest. |
 | `polyfills` | Array of [polyfill.io](https://polyfill.io/) keywords, for example `URL`. |
-| `repoName` | The Sentry webpack plugin's [repo](https://github.com/getsentry/sentry-webpack-plugin#optionssetcommits) value, for example `Group Name / Project Name`. |
 
 #### CMS
 
@@ -67,6 +66,25 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | `imgixUrl` | For example, `https://project.imgix.net` |
 | `srcsetWidths` | Array of integer widths that are used to make the Visual srcSet. |
 | `placeholderColor` | The default placeholder color for Visual |
+
+## Other Config
+
+#### Sentry
+
+To enable Sentry logging, you'll need to set the following ENV variables:
+
+| Property | Description |
+| -------- | ----------- |
+| `SENTRY_DSN` | This will be provided when you create a new project in Sentry. |
+| `SENTRY_AUTH_TOKEN` | Get this from [your user API settings](https://sentry.io/settings/account/api/auth-tokens). You need the `org:read` and `project:releases` permissions for the token (per `authToken` docs from [`sentry-webpack-plugin`](https://github.com/getsentry/sentry-webpack-plugin)). |
+
+You also need to create a `.sentryclirc` as [described here](https://docs.sentry.io/product/cli/configuration/#config-defaults).  `create-cloak-app` will have already created this.  Example:
+
+```
+[defaults]
+org=bukwild
+project=my-project
+```
 
 ## Libraries
 
