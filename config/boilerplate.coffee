@@ -51,9 +51,6 @@ module.exports = (options) ->
 		# Craft _typenames for page routes
 		pageTypes: []
 
-		# Sentry repo name, like "Group Name / Repo Name"
-		repoName: null
-
 	# Merge all the concerns together, excuting their callbacks with the passed
 	# in options. Filter out empty concerns, like if there was an early return.
 	settings = concerns

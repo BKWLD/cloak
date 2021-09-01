@@ -1,9 +1,8 @@
 ###
 Config Sentry error logging
 ###
-module.exports = ({ repoName }) ->
+module.exports = ->
 	return unless process.env.SENTRY_DSN
-	throw "Need to set repoName" unless repoName
 
 	# Add module
 	modules: [ '@nuxtjs/sentry' ]
