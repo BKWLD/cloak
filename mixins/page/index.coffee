@@ -2,10 +2,11 @@
 This mixin should be added to all pages/towers.  It adds functionality for
 supporting Craft's preview mode as well as generating meta values automatically.
 ###
-import craftPreview from './craft-preview'
+if process.env.CMS == 'craft'
+then craftPreview = require('./craft-preview').default
 import headTags from './head-tags'
 export default
 	mixins: [
-		craftPreview if process.env.CMS == 'craft'
+		craftPreview
 		headTags
 	].filter (val) -> !!val
