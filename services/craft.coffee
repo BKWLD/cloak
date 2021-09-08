@@ -63,8 +63,6 @@ getCraftPreviewTokens = ->
 	return unless window?
 	return unless query = (new URL window.location.href).searchParams
 	token: query.get('token')
-	'x-craft-preview': query.get('x-craft-preview')
-	'x-craft-live-preview': query.get('x-craft-live-preview')
 
 # Execute a list of entries
 export getEntries = (payload) ->
