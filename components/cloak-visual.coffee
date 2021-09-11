@@ -95,12 +95,15 @@ export default
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
 		# kinda weird so it defaults to true when blockIndex is undefined
-		notCriticalImage = !(injections.blockIndex < 2)
-		lazyload = props.lazyload ? notCriticalImage
+		isCriticalImage = injections.blockIndex < 2
+		lazyload = props.lazyload ? not isCriticalImage
 
-		# If transition is undefined and is a crticial image, disable the
-		# transition so the visual doesn't begin as display none.
-		transition = props.transition ? if notCriticalImage then undefined else ''
+		# If transition is undefined and is a crticial image or lazy loading is
+		# disabled, then disable transition so the visual doesn't begin as display
+		# none, which would delay LCP.
+		transition = props.transition ?
+			if isCriticalImage or not lazyload
+			then '' else undefined
 
 		# Instantiate a Visual instance
 		create Visual, {
