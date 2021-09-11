@@ -1,7 +1,7 @@
 ###
 Global helper methods
 ###
-import * as helpers from '../services/helpers.coffee'
+import * as helpers from '../services/helpers'
 export default ({ error }, inject) ->
 
 	# Make 404 response
