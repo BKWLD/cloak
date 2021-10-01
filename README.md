@@ -63,11 +63,22 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 
 | Property | Description |
 | -------- | ----------- |
-| `imgixUrl` | For example, `https://project.imgix.net` |
+| `imgixUrl` | For example, `https://project.imgix.net`. |
 | `srcsetWidths` | Array of integer widths that are used to make the Visual srcSet. |
-| `placeholderColor` | The default placeholder color for Visual |
+| `placeholderColor` | The default placeholder color for Visual. |
 
 ## Other Config
+
+#### Contentful
+
+The following ENV variables are expected to use Contentful
+
+| Property | Description |
+| -------- | ----------- |
+| `CONTENTFUL_SPACE` | The space id. |
+| `CONTENTFUL_ACCESS_TOKEN` | The Delivery API access token. |
+| `CONTENTFUL_PREVIEW_ACCESS_TOKEN` | The Preview API access token. |
+| `CONTENTFUL_PREVIEW` | Set to `true` use the Preview API rather than the Delivery API. Aka, to return draft/changed entries. |
 
 #### Sentry
 

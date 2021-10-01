@@ -16,7 +16,15 @@ module.exports = ({ cms }) ->
 					CMS_SITE: process.env.CMS_SITE
 				when 'contentful'
 					CONTENTFUL_SPACE: process.env.CONTENTFUL_SPACE
-					CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN
+					CONTENTFUL_PREVIEW: process.env.CONTENTFUL_PREVIEW
+
+					# Don't expose the preview access token when it's not being used
+					CONTENTFUL_ACCESS_TOKEN: do ->
+						if process.env.CONTENTFUL_PREVIEW and
+							previewToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+						then previewToken
+						else process.env.CONTENTFUL_ACCESS_TOKEN
+
 		)
 	}
 

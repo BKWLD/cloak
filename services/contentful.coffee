@@ -36,6 +36,9 @@ client.interceptors.response.use null, (error) ->
 # Run the API query
 export execute = (payload) ->
 
+	# Massage request
+	payload = loadPreviews payload
+
 	# Excute the query
 	response = await client
 		method: 'post'
@@ -43,6 +46,17 @@ export execute = (payload) ->
 
 	# Return data
 	return response.data.data
+
+# Use preview API to fetch draft entries
+loadPreviews = (payload) ->
+	return payload unless process.env.CONTENTFUL_PREVIEW
+	return {
+		...payload
+		variables: {
+			preview: true
+			...(payload.variables || {})
+		}
+	}
 
 # Execute a list of entries
 export getEntries = (payload) ->
