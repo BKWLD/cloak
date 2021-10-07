@@ -42,6 +42,9 @@ export default
 		# Were sources created upstream, by, for instance responsive-*-visual
 		hasSources = !!scopedSlots['image-source']
 
+		# Don't make src-sets for vector images
+		noSrcset = !!image?.contentType?.match(/image\/svg/i)
+
 		# Instantiate a Visual instance
 		create CloakVisual, {
 			...data
@@ -52,7 +55,7 @@ export default
 
 				# Image
 				image: imageUrl
-				...(if hasSources then {} else {
+				...(if hasSources || noSrcset then {} else {
 					srcset: makeSrcset image, webp: false, max: width || maxWidth
 					webpSrcset: makeSrcset image, webp: true, max: width || maxWidth
 				})
