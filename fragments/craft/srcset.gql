@@ -1,6 +1,6 @@
 #import './image.gql'
 
-# Adds image transforming to the basic image fragment, for one imgix can't
+# Adds image transforming to the basic image fragment, for when imgix can't
 # be used.
 fragment srcset on AssetInterface {
 	...image
