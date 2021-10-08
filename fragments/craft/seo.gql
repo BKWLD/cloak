@@ -3,5 +3,6 @@ fragment seo on seo_BlockType {
 	metaTitle
 	metaDescription
 	metaImage { path, url }
+	canonicalUrl
 	robots
 }
