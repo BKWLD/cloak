@@ -42,6 +42,9 @@ export default
 		# Were sources created upstream, by, for instance responsive-*-visual
 		hasSources = !!scopedSlots['image-source']
 
+		# Don't make src-sets for vector images or gifs
+		noSrcset = !!image?.contentType?.match(/image\/(svg|gif)/i)
+
 		# Instantiate a Visual instance
 		create CloakVisual, {
 			...data
@@ -52,7 +55,7 @@ export default
 
 				# Image
 				image: imageUrl
-				...(if hasSources then {} else {
+				...(if hasSources || noSrcset then {} else {
 					srcset: makeSrcset image, webp: false, max: width || maxWidth
 					webpSrcset: makeSrcset image, webp: true, max: width || maxWidth
 				})
@@ -78,9 +81,6 @@ export default
 # The srcset values need to match those used in transforms in the query
 export makeSrcset = (image, { webp, max } = {}) ->
 	return unless image
-
-	# Passthru gifs, currently ignoring imgix for this
-	if image.contentType == 'image/gif' then return image.url
 
 	# Don't output src options that are greater then a 2X version of the max width
 	sizes = unless max then resizeWidths
