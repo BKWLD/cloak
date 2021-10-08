@@ -36,13 +36,17 @@ export default
 			image = img(@pageSeo.metaImage) or img(image) or
 				img(@defaultSeo.metaImage)
 			robots = @pageSeo.robots or @defaultSeo.robots
+			
+			# Allow overwriting of canonical link
+			if @page.canonical then canonical = @page.canonical
+			else canonical = process.env.URL + @$route.path
 
 			# Create the object, filtering empties
 			title: title
 			link: if process.env.URL then [
 				hid: 'canonical'
 				rel: 'canonical'
-				href: process.env.URL + @$route.path
+				href: canonical
 			]
 			meta: [
 				@$metaTag 'og:title', title
