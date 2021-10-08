@@ -30,10 +30,17 @@ fontagon-font-path ?= '~assets/fonts/fontagon/dist'
 	/* Support for IE. */
 	font-feature-settings 'liga'
 
-// Begin writing font classes
+// Font classes
 
 {{#each codepoints}}
 .{{../classPrefix}}-{{@key}}
 	&:before
 		content "\\{{this}}"
+{{/each}}
+
+// Stylus mixins (for adding icons to pseudo-elements)
+
+{{#each codepoints}}
+{{../classPrefix}}-{{@key}}()
+	content "\\{{this}}"
 {{/each}}
