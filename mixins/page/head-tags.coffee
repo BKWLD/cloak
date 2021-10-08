@@ -38,8 +38,7 @@ export default
 			robots = @pageSeo.robots or @defaultSeo.robots
 			
 			# Allow overwriting of canonical link
-			if @page.canonical then canonical = @page.canonical
-			else canonical = process.env.URL + @$route.path
+			canonical = @pageSeo.canonical or process.env.URL + @$route.path
 
 			# Create the object, filtering empties
 			title: title
