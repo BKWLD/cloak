@@ -49,7 +49,7 @@ module.exports = (...args) ->
 
 				# Combine the arrays and remove from settings because it's been
 				# processed
-				config[key] = [...(config[key] || []), ...settings[key]]
+				config[key] = [...(config[key] || []), ...(settings[key] || [])]
 				delete settings[key]
 
 				# Dedupe by the appropriate property

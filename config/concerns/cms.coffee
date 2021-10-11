@@ -31,4 +31,4 @@ module.exports = ({ cms }) ->
 	# Adds the cms service plugin
 	modules: [
 		[ join(__dirname, '../../modules/register-cms-service'), { cms }]
-	]
+	] if cms in [ 'craft' , 'contentful' ]
