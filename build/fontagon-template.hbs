@@ -31,7 +31,8 @@ fontagon-base-styles()
 
 // Make icon class
 [class^="{{classPrefix}}-"], [class*=" {{classPrefix}}-"]
-	fontagon-base-styles()
+	&:before
+		fontagon-base-styles()
 
 // Font classes
 
@@ -39,12 +40,4 @@ fontagon-base-styles()
 .{{../classPrefix}}-{{@key}}
 	&:before
 		content "\\{{this}}"
-{{/each}}
-
-// Stylus mixins (for adding icons to pseudo-elements)
-
-{{#each codepoints}}
-{{../classPrefix}}-{{@key}}()
-	fontagon-base-styles()
-	content "\\{{this}}"
 {{/each}}
