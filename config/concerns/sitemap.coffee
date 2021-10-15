@@ -5,6 +5,7 @@ Configure the sitemap to be generated from the routes config
 { isGenerating } = require '../utils'
 module.exports = ({ cms, pageTypes }) ->
 	return unless isGenerating
+	return unless process.env.URL # Sitemap fatally errors if missing
 
 	# Before adding the sitemap, add a custom module that filters the routes
 	# from generate.routes by robots rules.
