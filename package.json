@@ -1,6 +1,6 @@
 {
 	"name": "@bkwld/cloak",
-	"version": "1.9.2",
+	"version": "1.10.0",
 	"author": "info@bukwild.com",
 	"license": "MIT",
 	"main": "index.js",
