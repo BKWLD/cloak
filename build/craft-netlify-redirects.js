@@ -27,14 +27,6 @@ export default function() {
 		const file = resolve(this.nuxt.options.srcDir, 'dist/_redirects')
 		let redirects = existsSync(file) ? readFileSync(file, 'utf8') : ''
 		
-		let data = { query: getEntries }
-
-		// if there's a CMS_SITE env var, then add it
-		// I tested this in craft and it didn't like an empty string
-		if (process.env.CMS_SITE) {
-			data.site = process.env.CMS_SITE
-		}
-
 		// Fetch the server side redirects
 		const response = await axios({
 			url: process.env.CMS_ENDPOINT,
@@ -42,7 +34,11 @@ export default function() {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			data: data
+			data: {				query: getEntries,
+				variables: {
+					site: process.env.CMS_SITE || null
+				}
+			}
 		});
 
 		// Write redirects file back out
