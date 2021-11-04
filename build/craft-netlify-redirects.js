@@ -26,7 +26,7 @@ export default function() {
 		// Open up _redirects
 		const file = resolve(this.nuxt.options.srcDir, 'dist/_redirects')
 		let redirects = existsSync(file) ? readFileSync(file, 'utf8') : ''
-		
+
 		// Fetch the server side redirects
 		const response = await axios({
 			url: process.env.CMS_ENDPOINT,
@@ -34,7 +34,8 @@ export default function() {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			data: {				query: getEntries,
+			data: {
+				query: getEntries,
 				variables: {
 					site: process.env.CMS_SITE || null
 				}
