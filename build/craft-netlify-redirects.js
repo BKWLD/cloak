@@ -7,8 +7,8 @@ import { resolve } from 'path'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 
 // Query for redirects
-const getEntries = `query getRedirects {
-	entries(type:"redirects") {
+const getEntries = `query getRedirects(($site:[String])) {
+	entries(type:"redirects", site:$site) {
 		... on redirects_redirects_Entry {
 			from: redirectFrom
 			to: redirectTo
@@ -26,6 +26,7 @@ export default function() {
 		// Open up _redirects
 		const file = resolve(this.nuxt.options.srcDir, 'dist/_redirects')
 		let redirects = existsSync(file) ? readFileSync(file, 'utf8') : ''
+		let site = process.env.CMS_SITE ? process.env.CMS_SITE : ''
 
 		// Fetch the server side redirects
 		const response = await axios({
@@ -35,7 +36,8 @@ export default function() {
 				'Content-Type': 'application/json'
 			},
 			data: {
-				query: getEntries
+				query: getEntries,
+				site: site
 			}
 		});
 
