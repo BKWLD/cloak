@@ -7,7 +7,7 @@ import { resolve } from 'path'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 
 // Query for redirects
-const getEntries = `query getRedirects(($site:[String])) {
+const getEntries = `query getRedirects($site:[String]) {
 	entries(type:"redirects", site:$site) {
 		... on redirects_redirects_Entry {
 			from: redirectFrom
