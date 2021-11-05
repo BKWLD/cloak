@@ -57,4 +57,8 @@ export default
 			].filter (tag) -> !!tag?.content
 
 # A helper for accessing image values that may be part of an Array with Craft
-img = (field) -> field?[0]?.url or field?.url or field
+img = (field) ->
+	field?[0]?.url or
+	field?.url or
+	if field?.length == 0 then null # For empty arrays
+	else field
