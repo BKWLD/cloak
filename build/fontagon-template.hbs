@@ -9,8 +9,7 @@ fontagon-font-path ?= '~assets/fonts/fontagon/dist'
 	font-style normal
 	font-display block
 
-// Make icon class
-[class^="{{classPrefix}}-"], [class*=" {{classPrefix}}-"]
+fontagon-base-styles()
 	font-family '{{fontName}}' !important
 	speak never
 	font-style normal
@@ -30,7 +29,12 @@ fontagon-font-path ?= '~assets/fonts/fontagon/dist'
 	/* Support for IE. */
 	font-feature-settings 'liga'
 
-// Begin writing font classes
+// Make icon class
+[class^="{{classPrefix}}-"], [class*=" {{classPrefix}}-"]
+	&:before
+		fontagon-base-styles()
+
+// Font classes
 
 {{#each codepoints}}
 .{{../classPrefix}}-{{@key}}
