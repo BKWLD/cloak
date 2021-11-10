@@ -66,6 +66,47 @@ export default
 			[INLINES.EMBEDDED_ENTRY]: @renderEmbedded
 			[BLOCKS.EMBEDDED_ENTRY]: @renderEmbedded
 			[BLOCKS.EMBEDDED_ASSET]: @renderAsset
+			break: (_node, key, create) -> create('br', {key}, {})
+			# Use renderTextBlock() for elements that should convert \n to <br>
+			[BLOCKS.HEADING_1]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h1')
+			[BLOCKS.HEADING_2]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h2')
+			[BLOCKS.HEADING_3]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h3')
+			[BLOCKS.HEADING_4]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h4')
+			[BLOCKS.HEADING_5]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h5')
+			[BLOCKS.HEADING_6]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h6')
+			[BLOCKS.PARAGRAPH]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'p')
+
+		# Render function for text blocks
+		renderTextBlock: (node, key, create, next, element) ->
+			# Convert \n to <br>
+			content = @getNodeContentWithNewline({ node, key })
+
+			# Render it
+			return create(element, { key }, next(content, key, create, next))
+
+		# Convert "\n" strings into <br> nodes
+		# If `node` arg is a text node that contains instances of "\n",
+		# convert it to an array of text nodes with "br" nodes in between.
+		# Fixes behavior where adding soft return in Contentful (shift + enter)
+		# had no effect on the front end.
+		# https://github.com/paramander/contentful-rich-text-vue-renderer/issues/29
+		# https://codesandbox.io/s/delicate-shadow-81xs7?file=/src/App.vue
+		getNodeContentWithNewline: ({ node, key }) ->
+			nodeContentWithNewlineBr = node.content.map (childNode) ->
+				if childNode.nodeType == "text"
+					splittedValue = childNode.value.split "\n"
+					return splittedValue
+						.reduce(
+							(aggregate, v, i) -> [
+								...aggregate
+								{ ...childNode, value: v }
+								{ nodeType: "break", key: "#{key}-br-#{i}" },
+							],
+							[]
+						)
+						.slice(0, -1)
+				return childNode
+			return [].concat.apply([], nodeContentWithNewlineBr);
 
 		# Renderer function for embedded blocks
 		renderEmbedded: (node, key, create) ->
