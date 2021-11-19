@@ -36,5 +36,4 @@ module.exports = ({ cms, pageTypes }) ->
 		# Things that shouldn't trigger a rebuild
 		cache: ignore: [
 			'**/fontagon/dist/*' # Fontagon writes exported stuff here
-			'build/*' # Code related to SSG
 		]
