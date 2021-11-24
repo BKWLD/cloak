@@ -52,7 +52,7 @@ export default
 			type: Boolean
 			default: undefined
 
-		# Other types with default values in Contentful visual that we want to be able
+		# Other types with default values in Vue Visual that we want to be able
 		# to test for undefined-ness
 		transition:
 			type: String
