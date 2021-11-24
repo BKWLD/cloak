@@ -77,7 +77,7 @@ export default
 				objectPosition: makeObjectPosition props.objectPosition, image
 
 				# Accessibility
-				alt: image?.title || video?.title
+				alt: props.alt ? image?.title || video?.title
 
 		# Passthrough slot
 		}}, children
