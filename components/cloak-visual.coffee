@@ -65,9 +65,13 @@ export default
 	# Render a Visual instance
 	render: (create, { props, injections, data, children, scopedSlots }) ->
 
+		# if the file is a PNG, then don't show a placeholder
+		img = props.image?[0]
+		isPng = img?.path.match(/.(png)$/i) || img?.mimeType == 'image/png'
+
 		# Decide if there is a placeholder color
-		placeholderColor = if props.noPlaceholder then null
-		else process.env.PLACEHOLDER_COLOR || '#f3f3f2'
+		placeholderColor = if props.noPlaceholder || isPng then null
+		else process.env.PLACEHOLDER_COLOR || 'rgba(0,0,0,.2)'
 
 		# Convert "16:9" style aspect to a number
 		aspect = if props.aspect and
