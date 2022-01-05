@@ -102,7 +102,14 @@ export flattenEntry = (entry) ->
 
 			# Flatten `items` and recurse through children
 			when (items = entry[key]?.items) and Array.isArray items
-			then obj[key] = flattenEntries items
+
+				# If `items` has a `total` property, save it to `{key}Total`
+				# so we don't lose it. This can be used for pagination.
+				if (total = entry[key]?.total)?
+				then obj["#{key}Total"] = total
+
+				# Do the flattening
+				obj[key] = flattenEntries items
 
 			# Otherwise, passthrough the key/val
 			else obj[key] = entry[key]
