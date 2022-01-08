@@ -23,7 +23,7 @@ export default
 
 		# Helper to make head tags. Passed in props are only used if explicit meta
 		# values aren't found.  The expectation is that these values are fallbacks.
-		buildHead: ({ title, description, image } = {}) ->
+		buildHead: ({ title, description, image, canonical } = {}) ->
 
 			# If no page, like on error pages, abort
 			return unless @page
@@ -40,6 +40,7 @@ export default
 			# Allow overwriting of canonical link
 			canonical = switch
 				when @pageSeo.canonicalUrl then @pageSeo.canonicalUrl
+				when canonical then canonical
 				when process.env.URL then process.env.URL + @$route.path
 
 			# Create the object, filtering empties
