@@ -33,6 +33,9 @@ export default
 
 		# Clear placeholder color, like for logos
 		noPlaceholder: Boolean
+		autoNoPlaceholder:
+			type: Boolean
+			default: true
 
 		# Set base booleans to an undefined default so we can test whether they
 		# were explicitly made false or are actually undefined
@@ -65,14 +68,6 @@ export default
 	# Render a Visual instance
 	render: (create, { props, injections, data, children, scopedSlots }) ->
 
-		# if the file is a PNG, then don't show a placeholder
-		img = props.image?[0]
-		isPng = img?.path.match(/.(png)$/i) || img?.mimeType == 'image/png'
-
-		# Decide if there is a placeholder color
-		placeholderColor = if props.noPlaceholder || isPng then null
-		else process.env.PLACEHOLDER_COLOR || 'rgba(0,0,0,.2)'
-
 		# Convert "16:9" style aspect to a number
 		aspect = if props.aspect and
 			typeof props.aspect == 'string' and
@@ -96,6 +91,13 @@ export default
 		# Warn developers to specify a sizes prop
 		if props.image and !sizes and process.env.APP_ENV == 'dev'
 		then console.debug "No sizes prop for #{props.image}"
+
+		# Clear placeholder color if `no-placeholder` prop is set or if the image
+		# is of a format that woulds support transparency.  The latter is handy
+		# for product images.
+		if props.noPlaceholder or
+			(props.autoNoPlaceholder and props.image.match /\.(png|svg)/i)
+		then placeholderColor = null
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
 		# kinda weird so it defaults to true when blockIndex is undefined
