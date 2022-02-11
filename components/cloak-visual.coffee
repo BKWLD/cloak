@@ -90,7 +90,7 @@ export default
 		else props.sizes
 
 		# Warn developers to specify a sizes prop
-		if props.image and !sizes and process.env.APP_ENV == 'dev'
+		if props.srcset and !sizes and process.env.APP_ENV == 'dev'
 		then console.debug "No sizes prop for #{props.image}"
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
