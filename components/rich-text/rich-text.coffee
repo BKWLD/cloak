@@ -23,7 +23,16 @@ export default
 		unorphan: Boolean
 		balanceText: Boolean
 
+		# Optional.  For manually setting the fetchKey to something unique
+		# to each component instance.  Use this if you're getting Nuxt fetch key
+		# conflicts.  This can happen after client-side navigation in static mode.
+		# Can cause your rich-text 'links' to get nulled out, or the message
+		# to appear: "Missing renderer for undefined".
+		fetchKey: String
+
 	data: -> links: {}
+
+	fetchKey: (getCounter) -> @fetchKey or getCounter()
 
 	# Fetch linked entries
 	fetch: ->
