@@ -95,9 +95,9 @@ export default
 		# Clear placeholder color if `no-placeholder` prop is set or if the image
 		# is of a format that woulds support transparency.  The latter is handy
 		# for product images.
-		if props.noPlaceholder or
+		placeholderColor = unless props.noPlaceholder or
 			(props.autoNoPlaceholder and props.image.match /\.(png|svg)/i)
-		then placeholderColor = null
+		then process.env.PLACEHOLDER_COLOR || 'rgba(0,0,0,.2)'
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
 		# kinda weird so it defaults to true when blockIndex is undefined
