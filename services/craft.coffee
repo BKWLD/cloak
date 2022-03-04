@@ -53,7 +53,7 @@ restrictToSite = (payload) ->
 	return {
 		...payload
 		variables: {
-			site: process.env.CMS_SITE || process.env.APP_ENV || 'dev'
+			site: process.env.CMS_SITE
 			...(payload.variables || {})
 		}
 	}

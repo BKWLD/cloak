@@ -56,8 +56,9 @@ These are options you can pass to `makeBoilerplate`.  See the [source code](conf
 | Property | Description |
 | -------- | ----------- |
 | `cms` | May be empty, `craft`, or `contentful`. |
-| `pageTypes` (if Craft) | An array of Craft `_typename` values. |
-| `pageTypes` (if Contentful) | An array of objects with the following properties: `contentType` (a Contentful contentType string), `routeField` (the field that holds the value you'll use in your route, defaults to `"slug"`), and `route` (a function that is passed the value from the `routeField` and which should return a route path). |
+| `pageTypes` *(if Craft)* | An array of Craft `_typename` values. |
+| `pageTypes` *(if Contentful)* | An array of objects with the following properties: `contentType` (a Contentful contentType string), `routeField` (the field that holds the value you'll use in your route, defaults to `"slug"`), and `route` (a function that is passed the value from the `routeField` and which should return a route path). |
+| `generateOnlyRoutes` | *Craft only.* Typically we generate a gql query per `pageType` that fetches the data for all entries, passing their data into the page components as the payload. Set this to `true` to disable this. You would do this on sites with many entries because this query becomes very expensive for Craft to execute. |
 
 #### Visual
 
