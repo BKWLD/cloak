@@ -2,7 +2,7 @@
 Prepare to statically generate the site using routes from a Craft query
 ###
 { isGenerating } = require '../utils'
-module.exports = ({ cms, pageTypes }) ->
+module.exports = ({ cms, pageTypes, generateOnlyRoutes }) ->
 
 	# Always show output
 	build: quiet: false
@@ -31,7 +31,7 @@ module.exports = ({ cms, pageTypes }) ->
 			getPages = switch cms
 				when 'craft' then  require '../../build/get-craft-pages'
 				when 'contentful' then require '../../build/get-contentful-pages'
-			getPages pageTypes
+			getPages pageTypes, { generateOnlyRoutes }
 
 		# Things that shouldn't trigger a rebuild
 		cache: ignore: [
