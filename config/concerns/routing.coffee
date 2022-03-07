@@ -13,7 +13,8 @@ module.exports = ->
 	# Add a default route to towers
 	router: extendRoutes: (routes, resolve) ->
 
-		# Make the tower slug optional, so the root route will match
+		# Make the tower slug optional, so the root route will match. This also
+		# adds support for slashes without Tower URIs.
 		if existsSync path.join process.cwd(), 'pages/_tower.vue'
 			routes.find (route) -> route.name == 'tower'
 			.path = '/:tower*'
