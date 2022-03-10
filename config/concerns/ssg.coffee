@@ -2,10 +2,16 @@
 Prepare to statically generate the site using routes from a Craft query
 ###
 { isGenerating } = require '../utils'
+{ join } = require 'path'
 module.exports = ({ cms, pageTypes, generateOnlyRoutes }) ->
 
 	# Always show output
 	build: quiet: false
+
+	# Exit immediately on build failure
+	buildModules: [
+		join __dirname, '../../modules/exit-on-error.js'
+	]
 
 	generate:
 
