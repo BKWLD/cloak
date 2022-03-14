@@ -3,7 +3,7 @@ Configuration related to populating meta tags
 ###
 module.exports = ->
 
-	# This is used be head-tags
+	# This is used by head-tags
 	env: URL: process.env.URL
 
 	# Boilerplate meta tags
