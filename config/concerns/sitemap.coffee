@@ -3,7 +3,7 @@ Configure the sitemap to be generated from the routes config
 ###
 { join } = require 'path'
 { isGenerating } = require '../utils'
-module.exports = ({ cms, pageTypes }) ->
+module.exports = ->
 	return unless isGenerating
 	return unless process.env.URL # Sitemap fatally errors if missing
 

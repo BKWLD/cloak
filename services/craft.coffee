@@ -1,9 +1,6 @@
 import axios from 'axios'
 import pickBy from 'lodash/pickBy'
 
-# Check if generating
-generating = process.env.npm_lifecycle_event == 'generate'
-
 # Error object with custom handling
 class CraftError extends Error
 	name: 'CraftError'
