@@ -22,6 +22,7 @@ export default
 		# Make shorter accessors
 		image = props.image
 		video = props.video
+		nullAlt = (image and image.description == 'null') || (video and video.description == 'null')
 
 		# Get the image src, ignoring srcset for now.  We're using the
 		imageUrl = if props.natural then image?.url
@@ -70,7 +71,7 @@ export default
 				maxWidth
 
 				# Accessibility
-				alt: image?.description ||
+				alt: if nullAlt then "" else image?.description ||
 					image?.title ||
 					video?.description ||
 					video?.title
