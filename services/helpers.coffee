@@ -32,7 +32,7 @@ export validators =
 	email: (val) -> /\S+@\S+\.\S+/.test(val) || 'Not a valid email'
 	required: (val) -> !!val.trim() || 'This field is required'
 
-# Helper for makking meta tags
+# Helper for making meta tags
 export metaTag = (key, val, keyAttribute = null) ->
 
 	# Make the key attribute
