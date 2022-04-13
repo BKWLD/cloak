@@ -70,7 +70,7 @@ export default
 				maxWidth
 
 				# Accessibility
-				alt: if nullAlt then "" else image?.description ||
+				alt: props.alt ? image?.description ||
 					image?.title ||
 					video?.description ||
 					video?.title
