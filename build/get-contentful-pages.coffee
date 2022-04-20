@@ -36,8 +36,8 @@ module.exports = memoize (pageTypes) ->
 # GQL to get all the entries of a page
 makeQuery = ({ contentType, routeField = 'slug' }) ->
 	"""
-	query {
-		#{contentType}Collection(limit: 1000) {
+	query getRoutes($preview:Boolean = false) {
+		#{contentType}Collection(limit: 1000, preview: $preview) {
 			items {
 				... on #{upperFirst(contentType)} {
 					#{routeField}
