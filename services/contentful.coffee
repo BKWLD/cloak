@@ -7,13 +7,19 @@ import axios from 'axios'
 # when services/contentful was imported from a Nuxt module
 nonEmpty = (array) -> array.filter (val) -> !!val
 
+export getAccessToken = ->
+	if process.env.CONTENTFUL_PREVIEW and
+		previewToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+	then previewToken
+	else process.env.CONTENTFUL_ACCESS_TOKEN
+
 # Make a Contentful client
 client = axios.create
 	baseURL: 'https://graphql.contentful.com/content/v1/spaces/' +
 		process.env.CONTENTFUL_SPACE
 	headers:
 		'Content-Type': 'application/json'
-		'Authorization': 'Bearer ' + process.env.CONTENTFUL_ACCESS_TOKEN
+		'Authorization': 'Bearer ' + getAccessToken()
 
 # Retry requests when met with Contentful API rate limits.
 # https://www.contentful.com/developers/docs/references/graphql/#/introduction/api-rate-limits
