@@ -85,7 +85,7 @@ export default
 
 		# Use the width as the size if passed
 		sizes = if !props.sizes and props.width
-			if String(props.width).match /^\d+$/
+			if String(props.width)?.match /^\d+$/
 			then "#{props.width}px" # If width a number, treat as "px"
 			else props.width
 		else props.sizes
@@ -98,7 +98,7 @@ export default
 		# is of a format that woulds support transparency.  The latter is handy
 		# for product images.
 		placeholderColor = unless props.noPlaceholder or
-			(props.autoNoPlaceholder and props.image.match /\.(png|svg)/i)
+			(props.autoNoPlaceholder and props.image?.match /\.(png|svg)/i)
 		then process.env.PLACEHOLDER_COLOR || 'rgba(0,0,0,.2)'
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
