@@ -2,6 +2,7 @@
 Add configuration required to interact with CMS choice
 ###
 { join } = require 'path'
+{ getAccessToken } = require '../../services/contentful'
 module.exports = ({ cms }) ->
 	return unless cms
 
@@ -19,11 +20,7 @@ module.exports = ({ cms }) ->
 					CONTENTFUL_PREVIEW: process.env.CONTENTFUL_PREVIEW
 
 					# Don't expose the preview access token when it's not being used
-					CONTENTFUL_ACCESS_TOKEN: do ->
-						if process.env.CONTENTFUL_PREVIEW and
-							previewToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-						then previewToken
-						else process.env.CONTENTFUL_ACCESS_TOKEN
+					CONTENTFUL_ACCESS_TOKEN: getAccessToken()
 
 		)
 	}
