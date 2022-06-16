@@ -98,7 +98,7 @@ export default
 		# is of a format that woulds support transparency.  The latter is handy
 		# for product images.
 		placeholderColor = unless props.noPlaceholder or
-			(props.autoNoPlaceholder and props.image.match /\.(png|svg)/i)
+			(props.autoNoPlaceholder and props.image?.match /\.(png|svg)/i)
 		then process.env.PLACEHOLDER_COLOR || 'rgba(0,0,0,.2)'
 
 		# Disable lazy loading automatically if found in 2 blocks. Written
