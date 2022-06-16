@@ -85,7 +85,7 @@ export default
 
 		# Use the width as the size if passed
 		sizes = if !props.sizes and props.width
-			if String(props.width)?.match /^\d+$/
+			if String(props.width).match /^\d+$/
 			then "#{props.width}px" # If width a number, treat as "px"
 			else props.width
 		else props.sizes
