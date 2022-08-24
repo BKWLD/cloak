@@ -84,10 +84,15 @@ export default
 			[BLOCKS.HEADING_5]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h5')
 			[BLOCKS.HEADING_6]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'h6')
 			[BLOCKS.PARAGRAPH]: (node, key, create, next) => @renderTextBlock(node, key, create, next, 'p')
-			[BLOCKS.TABLE]: (node, key, create, next) => create('table', { key }, next(node.content, key, create, next))
+			[BLOCKS.TABLE]: (node, key, create, next) => @wrapElement('table', {class: 'table-wrapper'}, node, key, create, next)
 			[BLOCKS.TABLE_ROW]: (node, key, create, next) => create('tr', { key }, next(node.content, key, create, next))
 			[BLOCKS.TABLE_CELL]: (node, key, create, next) => create('td', { key }, next(node.content, key, create, next))
 			[BLOCKS.TABLE_HEADER_CELL]: (node, key, create, next) => create('th', { key }, next(node.content, key, create, next))
+
+		# Render function that wraps a div over an element
+		wrapElement: (element, wrapperData, node, key, create, next) ->
+			element = create(element, {key}, next(node.content, key, create, next))
+			create 'div', wrapperData, [element]
 
 		# Render function for text blocks
 		renderTextBlock: (node, key, create, next, element) ->
