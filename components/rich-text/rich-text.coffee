@@ -89,7 +89,7 @@ export default
 			[BLOCKS.TABLE_CELL]: (node, key, create, next) => create('td', { key }, next(node.content, key, create, next))
 			[BLOCKS.TABLE_HEADER_CELL]: (node, key, create, next) => create('th', { key }, next(node.content, key, create, next))
 
-		# Render function that wraps a div over an element
+		# Render function that wraps a div around an element
 		wrapElement: (element, wrapperData, node, key, create, next) ->
 			element = create(element, {key}, next(node.content, key, create, next))
 			create 'div', wrapperData, [element]
