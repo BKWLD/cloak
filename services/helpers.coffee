@@ -88,6 +88,8 @@ export makeImgixUrl = (path, width) ->
 	return unless imgixUrl = process.env.IMGIX_URL
 	return unless path
 	return "#{imgixUrl}/#{path}" unless width
+	if quality = process.env.DEFAULT_IMAGE_QUALITY
+	then return "#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&q=#{quality}"
 	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&auto=compress"
 
 # Format a URL for Contentful
