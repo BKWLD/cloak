@@ -45,8 +45,11 @@ export default
 
 		# Create visual for the current viewport width
 		if @landscape || @portrait
-			unless @isResponsive
-			then create CraftVisual, @landscape || @portrait, @$slots.default
+			# If not responsive or processing via Imgix
+			# Simply default render
+			# Otherwise pass in source map
+			if !@isResponsive || process.env.IMGIX_URL
+				create CraftVisual, @landscape || @portrait, @$slots.default
 			else create CraftVisual, {
 				...@responsiveConfig
 				scopedSlots: ['image-source']: =>
