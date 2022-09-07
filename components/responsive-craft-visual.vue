@@ -49,7 +49,7 @@ export default
 			# Simply default render
 			# Otherwise pass in source map
 			if !@isResponsive || process.env.IMGIX_URL
-				create CraftVisual, @landscape || @portrait, @$slots.default
+			then create CraftVisual, @landscape || @portrait, @$slots.default
 			else create CraftVisual, {
 				...@responsiveConfig
 				scopedSlots: ['image-source']: =>
