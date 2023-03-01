@@ -61,7 +61,7 @@ export default
 
 				# Image
 				image: imageUrl
-				...(if hasSources || noSrcset then {} else {
+				...(if hasSources || noSrcset || process.env.IMGIX_URL then {} else {
 					srcset: makeSrcset image, webp: false, max: width || maxWidth
 					webpSrcset: makeSrcset image, webp: true, max: width || maxWidth
 				})
