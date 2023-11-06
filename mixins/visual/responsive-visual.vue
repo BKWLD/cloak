@@ -19,6 +19,27 @@ export default
 		portraitVideo: Object
 	}
 
+	head: ->
+		return {} unless @isResponsive and @preload
+
+		return link: [
+			{
+				rel: 'preload'
+				as: 'image'
+				imagesrcset: @makeSrcset @landscape.props.image
+				href: @landscape.props.image
+				imagesizes: @sizes
+			}
+
+			{
+				rel: 'preload'
+				as: 'image'
+				imagesrcset: @makeSrcset @portrait.props.image
+				href: @portrait.props.image
+				imagesizes: @sizes
+			}
+		]
+
 	data: ->
 		mounted: false
 		isLandscape: null
