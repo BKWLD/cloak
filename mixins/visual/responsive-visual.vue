@@ -22,6 +22,8 @@ export default
 	head: ->
 		return {} unless @isResponsive and @preload
 
+		console.log('responsive visual, making head tags, landscape is', @landscape, 'portrait is', @portrait)
+
 		return link: [
 			{
 				rel: 'preload'
@@ -29,6 +31,7 @@ export default
 				imagesrcset: @makeSrcset @landscape.props.image
 				href: @landscape.props.image
 				imagesizes: @sizes
+				'data-ref': 'landscape',
 			}
 
 			{
@@ -36,7 +39,8 @@ export default
 				as: 'image'
 				imagesrcset: @makeSrcset @portrait.props.image
 				href: @portrait.props.image
-				imagesizes: @sizes
+				imagesizes: @sizes,
+				'data-ref': 'portrait',
 			}
 		]
 
