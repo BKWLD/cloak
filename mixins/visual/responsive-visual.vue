@@ -20,9 +20,7 @@ export default
 	}
 
 	head: ->
-		return {} unless @isResponsive and @preload
-
-		console.log('responsive visual, making head tags, landscape is', @landscape, 'portrait is', @portrait)
+		return {} unless @landscape?.props?.image and @portrait?.props?.image and @preload
 
 		return link: [
 			{
