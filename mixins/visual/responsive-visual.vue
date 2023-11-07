@@ -27,18 +27,18 @@ export default
 				rel: 'preload'
 				as: 'image'
 				imagesrcset: @makeSrcset @landscape.props.image
-				href: @landscape.props.image
+				href: @landscape?.props?.image?.url
 				imagesizes: @sizes
-				'data-ref': 'landscape',
+				media: '(orientation: landscape)'
 			}
 
 			{
 				rel: 'preload'
 				as: 'image'
 				imagesrcset: @makeSrcset @portrait.props.image
-				href: @portrait.props.image
+				href: @portrait?.props?.image?.url
 				imagesizes: @sizes,
-				'data-ref': 'portrait',
+				media: '(orientation: portrait)',
 			}
 		]
 
