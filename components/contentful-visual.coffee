@@ -3,7 +3,7 @@ import CloakVisual, { resizeWidths } from './cloak-visual'
 import { makeContentfulImageUrl } from '../services/helpers'
 
 # Image quality options
-imageQuality = {quality: process.env.IMAGE_QUALITY}
+imageQuality = {quality: 50}
 
 # Map Contentful image objects into params for visual
 export default
