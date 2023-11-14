@@ -20,7 +20,7 @@ export default
 	}
 
 	head: ->
-		return {} unless @landscape?.props?.image and @portrait?.props?.image and @preload
+		return {} unless @isResponsiveImage
 
 		return link: [
 			{
@@ -56,6 +56,7 @@ export default
 		@isLanscapeMediaQuery?.removeListener @checkIsLandscape
 
 	computed:
+		isResponsiveImage: -> !!@landscape?.props?.image and !!@portrait?.props?.image and @preload
 
 		# Visual configs
 		landscape: -> @makeConfig @getAsset('image', 'landscape'),
@@ -133,13 +134,19 @@ export default
 
 		# Make the config object for the create function by keeping all data and
 		# props except for replacing landscape and portrait with the asset itself
+		# and removing preload tag in case it was added
 		makeConfig: (image, video) ->
 			return unless image or video
+
+			# Don't pass preload to visual instance if we are adding responsive preload
+			preload = if @isResponsiveImage then false else @$props.preload
+
 			on: loaded: => @$emit 'loaded'
 			props: {
 				...@$props
 				image
 				video
+				preload
 				landscapeImage: undefined
 				portraitImage: undefined
 				landscapeVideo: undefined
