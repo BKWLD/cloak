@@ -2,9 +2,6 @@
 import CloakVisual, { resizeWidths } from './cloak-visual'
 import { makeContentfulImageUrl } from '../services/helpers'
 
-# Image quality options
-imageQuality = {quality: process.env.IMAGE_QUALITY}
-
 # Map Contentful image objects into params for visual
 export default
 	name: 'ContentfulVisual'
@@ -28,7 +25,7 @@ export default
 
 		# Get the image src, ignoring srcset for now.  We're using the
 		imageUrl = if props.natural then image?.url
-		else makeContentfulImageUrl image?.url, resizeWidths[0], imageQuality
+		else makeContentfulImageUrl image?.url, resizeWidths[0]
 
 		# Figure out the aspect ratio
 		aspect = switch
@@ -92,8 +89,7 @@ export makeSrcset = (image, { webp, max } = {}) ->
 		resizeWidths.filter (size) -> size <= maxWidth
 
 	# Set webp format
-
-	options = if webp then { format: 'webp', ...imageQuality} else imageQuality
+	options = if webp then { format: 'webp' }
 
 	# Make the srcset string
 	sizes.map (size) ->
