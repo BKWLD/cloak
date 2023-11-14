@@ -20,7 +20,7 @@ export default
 	}
 
 	head: ->
-		return {} unless @isResponsiveImage
+		return {} unless @isResponsiveImage and @preload
 
 		return link: [
 			{
