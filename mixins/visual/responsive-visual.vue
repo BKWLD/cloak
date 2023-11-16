@@ -147,6 +147,7 @@ export default
 			# If responsive, preloading will be handled by this component, not
 			# the child cloak-visual
 			preload = if @isResponsiveImage then false else @$props.preload
+			lazyload = if @isResponsiveImage and @shouldPreload then false else @$props.lazyload
 
 			on: loaded: => @$emit 'loaded'
 			props: {
@@ -154,6 +155,7 @@ export default
 				image
 				video
 				preload
+				lazyload
 				landscapeImage: undefined
 				portraitImage: undefined
 				landscapeVideo: undefined
