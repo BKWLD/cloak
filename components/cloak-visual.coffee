@@ -31,6 +31,10 @@ export default
 		# Use image's width as a max-width
 		noUpscale: Boolean
 
+		preload:
+			type: Boolean
+			default: undefined
+
 		# Clear placeholder color, like for logos
 		noPlaceholder: Boolean
 		autoNoPlaceholder:
