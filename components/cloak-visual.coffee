@@ -31,6 +31,7 @@ export default
 		# Use image's width as a max-width
 		noUpscale: Boolean
 
+		# Support for preload tags
 		preload:
 			type: Boolean
 			default: undefined
