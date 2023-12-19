@@ -32,7 +32,7 @@
 		"stylus": "^0.54.0",
 		"stylus-loader": "^3.0.0",
 		"vue-routing-anchor-parser": "^1.8.0",
-		"vue-visual": "^2.0.0",
+		"vue-visual": "https://github.com/BKWLD/vue-visual#poster-video",
 		"webpack-cli": "^3.0.0",
 		"webpack-graphql-loader": "gpoitch/graphql-loader#gp/refresh"
 	},
