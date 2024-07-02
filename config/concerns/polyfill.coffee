@@ -6,7 +6,7 @@ module.exports = ({ polyfills }) ->
 	# Use Polyfill.io for most polyfills
 	head: script: [
 		do ->
-			src = 'https://polyfill.io/v3/polyfill.min.js?features=' +
+			src = 'https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=4.8.0&features=' +
 				polyfills.join '%2C'
 			{ hid: 'polyfill', src, body: true }
 	]
