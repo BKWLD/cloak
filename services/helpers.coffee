@@ -83,7 +83,7 @@ export makeImgixUrl = (path, width) ->
 	return unless imgixUrl = process.env.IMGIX_URL
 	return unless path
 	return "#{imgixUrl}/#{path}" unless width
-	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&auto=compress"
+	"#{imgixUrl}/#{path}?w=#{width}&fit=max&auto=format&q=#{process.env.DEFAULT_IMAGE_QUALITY || 30}"
 
 # Capitalize the first letter of a word
 # https://flaviocopes.com/how-to-uppercase-first-letter-javascript/
