@@ -31,6 +31,11 @@ export default
 		# Use image's width as a max-width
 		noUpscale: Boolean
 
+		# Support for preload tags
+		preload:
+			type: Boolean
+			default: undefined
+
 		# Clear placeholder color, like for logos
 		noPlaceholder: Boolean
 		autoNoPlaceholder:
@@ -104,7 +109,8 @@ export default
 		# Disable lazy loading automatically if found in 2 blocks. Written
 		# kinda weird so it defaults to true when blockIndex is undefined
 		isCriticalImage = injections.blockIndex < 2
-		lazyload = props.lazyload ? not isCriticalImage
+		preload = props.preload ? isCriticalImage
+		lazyload = props.lazyload ? not isCriticalImage && not preload
 
 		# If transition is undefined and is a crticial image or lazy loading is
 		# disabled, then disable transition so the visual doesn't begin as display
@@ -133,6 +139,7 @@ export default
 				aspect
 
 				# Loading
+				preload
 				lazyload
 				transition
 				placeholderColor

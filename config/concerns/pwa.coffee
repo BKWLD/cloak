@@ -25,3 +25,6 @@ module.exports = ({ siteName }) ->
 		ogDescription: ''
 		ogImage: ''
 		author: ''
+		
+	# Force PWA to reload icon on build
+	pwa: icon: cacheDir: "node_modules/.cache/pwa/icon"

@@ -19,6 +19,31 @@ export default
 		portraitVideo: Object
 	}
 
+	inject: blockIndex: default: undefined
+
+	head: ->
+		return unless @isResponsiveImage and @shouldPreload
+
+		return link: [
+			{
+				rel: 'preload'
+				as: 'image'
+				imagesrcset: @makeSrcset @landscape.props.image
+				href: @landscape?.props?.image?.url
+				imagesizes: @sizes || ''
+				media: '(orientation: landscape)'
+			}
+
+			{
+				rel: 'preload'
+				as: 'image'
+				imagesrcset: @makeSrcset @portrait.props.image
+				href: @portrait?.props?.image?.url
+				imagesizes: @sizes || ''
+				media: '(orientation: portrait)'
+			}
+		]
+
 	data: ->
 		mounted: false
 		isLandscape: null
@@ -33,6 +58,11 @@ export default
 		@isLanscapeMediaQuery?.removeListener @checkIsLandscape
 
 	computed:
+		shouldPreload: ->
+			isCriticalImage = @blockIndex < 2
+			return @preload ? isCriticalImage
+
+		isResponsiveImage: -> !!@landscape?.props?.image and !!@portrait?.props?.image
 
 		# Visual configs
 		landscape: -> @makeConfig @getAsset('image', 'landscape'),
@@ -110,13 +140,22 @@ export default
 
 		# Make the config object for the create function by keeping all data and
 		# props except for replacing landscape and portrait with the asset itself
+		# and removing preload tag in case it was added
 		makeConfig: (image, video) ->
 			return unless image or video
+
+			# If responsive, preloading will be handled by this component, not
+			# the child cloak-visual
+			preload = if @isResponsiveImage then false else @$props.preload
+			lazyload = if @isResponsiveImage and @shouldPreload then false else @$props.lazyload
+
 			on: loaded: => @$emit 'loaded'
 			props: {
 				...@$props
 				image
 				video
+				preload
+				lazyload
 				landscapeImage: undefined
 				portraitImage: undefined
 				landscapeVideo: undefined
