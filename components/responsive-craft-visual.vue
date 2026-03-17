@@ -1,7 +1,7 @@
 <!-- Conditionally render landscape or portrait visual instances -->
 
-<script lang='coffee'>
-import CraftVisual, { getAssetObject, makeSrcset } from './craft-visual'
+<script lang="coffee">
+import CraftVisual, { getAssetObject, makeSrcset, getCraftImageUrl } from './craft-visual'
 import { ucFirst } from '../services/helpers'
 export default
 	name: 'ResponsiveCraftVisual'
@@ -35,16 +35,44 @@ export default
 	destroyed: ->
 		@isLanscapeMediaQuery?.removeListener @checkIsLandscape
 
+	inject: blockIndex: default: undefined
+
+	head: -> @preloadLinks if @priority
+
 	computed:
 
 		# Visual configs
-		landscape: -> @makeConfig @getAsset('image', 'landscape'),
-			@getAsset('video', 'landscape')
-		portrait: -> @makeConfig @getAsset('image', 'portrait'),
-			@getAsset('video', 'portrait')
+		landscape: -> @makeConfig @landscapeImageAsset, @landscapeVideoAsset
+		portrait: -> @makeConfig @portraitImageAsset, @portraitVideoAsset
+
+		landscapeImageAsset: -> @getAsset('image', 'landscape')
+		portraitImageAsset: -> @getAsset('image', 'portrait')
+		landscapeVideoAsset: -> @getAsset('video', 'landscape')
+		portraitVideoAsset: -> @getAsset('video', 'portrait')
 
 		# Do we have unique landscape and portrait configs?
 		isResponsive: -> !!(@landscape and @portrait)
+
+		priority: -> @blockIndex < 2
+
+		preloadLinks: ->
+			links = []
+			return links unless @priority
+			# Not preloading videos because of
+			# https://issues.chromium.org/issues/40526637#comment38
+			if @landscape.props.image
+				links.push
+					rel: 'preload'
+					as: 'image'
+					href: getCraftImageUrl @landscape.props.image
+					media: '(orientation: landscape)' if @isResponsive
+			if @portrait.props.image
+				links.push
+					rel: 'preload'
+					as: 'image'
+					href: getCraftImageUrl @portrait.props.image
+					media: '(orientation: portrait)' if @isResponsive
+			return links
 
 		# The config used when there is both landscape and portrait assets. The video
 		# prop will only be set once the viewport can be measured.
@@ -116,6 +144,7 @@ export default
 
 		# Make the config object for the create function by keeping all data and
 		# props except for replacing landscape and portrait with the asset itself
+		# and clearing priority values
 		makeConfig: (image, video) ->
 			return unless image or video
 			on: loaded: => @$emit 'loaded'
@@ -148,12 +177,11 @@ export default
 			image: undefined
 			video: undefined
 		}}, @$slots.default
-
 </script>
 
 <!-- ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-<style lang='stylus' scoped>
+<style lang="stylus" scoped>
 
 // Add responsive aspect ratio
 .responsive-visual >>> .vv-aspect-shim
@@ -161,5 +189,4 @@ export default
 		padding-top var(--landscape-aspect) !important
 	@media(orientation portrait)
 		padding-top var(--portrait-aspect) !important
-
 </style>

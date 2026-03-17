@@ -77,12 +77,7 @@ export default
 		video = getAssetObject props.video
 
 		# Get the image src, ignoring srcset for now.  We're using the
-		imageUrl = if process.env.IMGIX_URL
-			if props.natural then makeImgixUrl image?.path
-			else makeImgixUrl image?.path, resizeWidths[0]
-		else
-			if props.natural then image?.url
-			else image?['w' + resizeWidths[0]]
+		imageUrl = getCraftImageUrl(image, props.natural)
 
 		# Decide if there is a placeholder color
 		placeholderColor = if props.noPlaceholder then null
@@ -163,6 +158,8 @@ export default
 
 				# Loading
 				lazyload
+				preload: injections.blockIndex < 1
+				renderPreloadHeadLinks: !hasSources
 				transition
 				placeholderColor
 				intersectionOptions: props.intersectionOptions ?
@@ -217,6 +214,14 @@ export makeSrcset = (image, { webp, max } = {}) ->
 	# Filter out empties, for instance webps will be empty for svgs
 	.filter (val) -> !!val
 	.join ','
+
+export getCraftImageUrl = (image, natural) ->
+	if process.env.IMGIX_URL
+		if natural then makeImgixUrl image?.path
+		else makeImgixUrl image?.path, resizeWidths[0]
+	else
+		if natural then image?.url
+		else image?['w' + resizeWidths[0]]
 
 # Make sizes shorthands
 export sizesHelpers = (sizes) -> switch sizes
