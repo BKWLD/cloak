@@ -60,13 +60,13 @@ export default
 			return links unless @priority
 			# Not preloading videos because of
 			# https://issues.chromium.org/issues/40526637#comment38
-			if @landscape.props.image
+			if @landscape?.props.image
 				links.push
 					rel: 'preload'
 					as: 'image'
 					href: getCraftImageUrl @landscape.props.image
 					media: '(orientation: landscape)' if @isResponsive
-			if @portrait.props.image
+			if @portrait?.props.image
 				links.push
 					rel: 'preload'
 					as: 'image'
