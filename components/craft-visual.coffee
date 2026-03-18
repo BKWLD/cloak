@@ -158,7 +158,7 @@ export default
 
 				# Loading
 				lazyload
-				preload: injections.blockIndex < 1
+				preload: props.preload || injections.blockIndex < 1
 				renderPreloadHeadLinks: !hasSources
 				transition
 				placeholderColor
