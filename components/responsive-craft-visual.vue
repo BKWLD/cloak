@@ -37,7 +37,9 @@ export default
 
 	inject: blockIndex: default: undefined
 
-	head: -> @preloadLinks if @priority
+	head: -> 
+		return unless @priority
+		link: @preloadLinks
 
 	computed:
 
