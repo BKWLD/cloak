@@ -29,7 +29,7 @@ export execute = (payload) ->
 		method: 'post'
 		headers:
 			'Content-Type': 'application/json'
-			'Authorization': process.env.CRAFT_SCHEMA_TOKEN
+			'Authorization': 'Bearer ' + process.env.CRAFT_SCHEMA_TOKEN
 
 		# Should have query and maybe variables data
 		data: payload
