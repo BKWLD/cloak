@@ -27,7 +27,9 @@ export execute = (payload) ->
 	response = await axios
 		url: process.env.CMS_ENDPOINT
 		method: 'post'
-		headers: 'Content-Type': 'application/json'
+		headers:
+			'Content-Type': 'application/json'
+			'Authorization': process.env.CRAFT_SCHEMA_TOKEN
 
 		# Should have query and maybe variables data
 		data: payload
